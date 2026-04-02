@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Workout Tracker</title>
+<style>
+  :root {
+    --bg: #121212;
+    --surface: #1e1e1e;
+    --surface2: #2a2a2a;
+    --primary: #4fc3f7;
+    --primary-dark: #0288d1;
+    --success: #66bb6a;
+    --warning: #ffa726;
+    --danger: #ef5350;
+    --text: #e0e0e0;
+    --text-dim: #9e9e9e;
+    --text-bright: #ffffff;
+    --border: #333;
+    --radius: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 100px;
+    font-size: 16px;
+  }
+
+  /* Header */
+  .header {
+    background: var(--surface);
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header h1 { font-size: 20px; color: var(--text-bright); }
+  .header .subtitle { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+  .header .goal-badge {
+    display: inline-block;
+    background: var(--primary-dark);
+    color: var(--text-bright);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* Nav tabs */
+  .nav {
+    display: flex;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 76px;
+    z-index: 99;
+  }
+  .nav button {
+    flex: 1;
+    padding: 12px 8px;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+  }
+  .nav button.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+
+  /* Sections */
+  .section { display: none; padding: 16px; }
+  .section.active { display: block; }
+
+  /* Warmup/Cooldown */
+  .info-box {
+    background: var(--surface2);
+    border-left: 3px solid var(--primary);
+    padding: 12px 16px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+  .info-box strong { color: var(--text); }
+
+  /* Exercise card */
+  .exercise-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .exercise-card.completed { border-color: var(--success); }
+  .exercise-card.in-progress { border-color: var(--primary); }
+
+  .exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    cursor: pointer;
+    min-height: 60px;
+  }
+  .exercise-header .name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-bright);
+    flex: 1;
+  }
+  .exercise-header .prescription {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+  .exercise-header .status-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    margin-left: 12px;
+    flex-shrink: 0;
+  }
+  .status-pending { background: var(--surface2); color: var(--text-dim); }
+  .status-done { background: var(--success); color: #fff; }
+  .status-active { background: var(--primary); color: #fff; }
+
+  /* Set rows */
+  .sets-container {
+    display: none;
+    padding: 0 16px 16px;
+  }
+  .sets-container.open { display: block; }
+
+  .exercise-notes {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    background: var(--surface2);
+    border-radius: 8px;
+  }
+
+  .target-weight-display {
+    font-size: 13px;
+    color: var(--warning);
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    background: rgba(255, 167, 38, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 167, 38, 0.2);
+  }
+
+  .set-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding: 10px 12px;
+    background: var(--surface2);
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+  .set-row.logged {
+    background: rgba(102, 187, 106, 0.15);
+    border: 1px solid rgba(102, 187, 106, 0.3);
+  }
+
+  .set-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dim);
+    width: 50px;
+    flex-shrink: 0;
+  }
+
+  .input-group {
+    display: flex;
+    gap: 6px;
+    flex: 1;
+  }
+
+  .input-wrap {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .input-wrap label {
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    letter-spacing: 0.5px;
+  }
+  .input-wrap input {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-bright);
+    font-size: 18px;
+    padding: 10px 8px;
+    text-align: center;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+  .input-wrap input:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+
+  /* RPE selector */
+  .rpe-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 55px;
+    flex-shrink: 0;
+  }
+  .rpe-wrap label {
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+  .rpe-btn {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-bright);
+    font-size: 18px;
+    padding: 10px 4px;
+    text-align: center;
+    cursor: pointer;
+    min-height: 44px;
+  }
+  .rpe-btn:active { background: var(--surface2); }
+
+  .set-done-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: none;
+    color: var(--text-dim);
+    font-size: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    margin-bottom: 2px;
+  }
+  .set-done-btn.checked {
+    background: var(--success);
+    border-color: var(--success);
+    color: #fff;
+  }
+
+  /* RPE Modal */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 200;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--surface);
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 24px 20px 40px;
+    width: 100%;
+    max-width: 400px;
+  }
+  .modal h3 {
+    color: var(--text-bright);
+    margin-bottom: 4px;
+    font-size: 18px;
+  }
+  .modal p {
+    color: var(--text-dim);
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+  .rpe-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+  .rpe-option {
+    padding: 14px 8px;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    background: var(--surface2);
+    color: var(--text-bright);
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+  }
+  .rpe-option:active { transform: scale(0.95); }
+  .rpe-option .rpe-desc {
+    font-size: 9px;
+    font-weight: 400;
+    color: var(--text-dim);
+    margin-top: 2px;
+    display: block;
+  }
+  .rpe-1-3 { border-color: var(--success); }
+  .rpe-4-6 { border-color: var(--warning); }
+  .rpe-7-8 { border-color: #ff9800; }
+  .rpe-9-10 { border-color: var(--danger); }
+
+  /* Rest timer */
+  .rest-timer {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 12px;
+    background: var(--surface);
+    border: 1px solid var(--primary);
+    border-radius: var(--radius);
+  }
+  .rest-timer.active { display: block; }
+  .rest-timer .timer-display {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--primary);
+    font-variant-numeric: tabular-nums;
+  }
+  .rest-timer .timer-label {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .rest-timer button {
+    margin-top: 12px;
+    padding: 10px 24px;
+    background: var(--primary-dark);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  /* Complete button */
+  .complete-section {
+    padding: 20px 16px;
+  }
+  .complete-btn {
+    width: 100%;
+    padding: 18px;
+    background: var(--success);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+  }
+  .complete-btn:disabled {
+    background: var(--surface2);
+    color: var(--text-dim);
+  }
+
+  /* Summary */
+  .summary {
+    display: none;
+    padding: 20px 16px;
+  }
+  .summary.active { display: block; }
+  .summary h2 {
+    color: var(--success);
+    font-size: 24px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .summary-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .summary-card h4 {
+    color: var(--text-bright);
+    margin-bottom: 8px;
+  }
+  .summary-card .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 14px;
+  }
+  .summary-card .stat-label { color: var(--text-dim); }
+  .summary-card .stat-value { color: var(--text-bright); font-weight: 600; }
+
+  .email-btn {
+    width: 100%;
+    padding: 18px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+  }
+
+  /* Settings */
+  .settings-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .settings-group h3 {
+    color: var(--text-bright);
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  .settings-group select, .settings-group input {
+    width: 100%;
+    padding: 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-bright);
+    font-size: 16px;
+    -webkit-appearance: none;
+    margin-bottom: 8px;
+  }
+  .save-settings-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--primary-dark);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* History */
+  .history-entry {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .history-entry h4 { color: var(--text-bright); margin-bottom: 4px; }
+  .history-entry .date { color: var(--text-dim); font-size: 13px; margin-bottom: 8px; }
+  .history-entry .detail { font-size: 13px; color: var(--text); padding: 2px 0; }
+
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-dim);
+  }
+  .empty-state .icon { font-size: 48px; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1 id="dayTitle">Workout Tracker</h1>
+  <div class="subtitle" id="dateSubtitle"></div>
+  <div class="goal-badge" id="goalBadge">General</div>
+</div>
+
+<div class="nav">
+  <button class="active" onclick="showSection('workout')">Workout</button>
+  <button onclick="showSection('history')">History</button>
+  <button onclick="showSection('settings')">Settings</button>
+</div>
+
+<!-- WORKOUT SECTION -->
+<div id="workout-section" class="section active">
+  <div id="warmup-box" class="info-box"></div>
+  <div id="rest-timer" class="rest-timer">
+    <div class="timer-label">Rest Timer</div>
+    <div class="timer-display" id="timer-display">1:30</div>
+    <button onclick="skipTimer()">Skip</button>
+  </div>
+  <div id="exercises-container"></div>
+  <div id="cooldown-box" class="info-box"></div>
+  <div class="complete-section">
+    <button class="complete-btn" id="complete-btn" onclick="completeWorkout()">Complete Workout</button>
+  </div>
+  <div class="summary" id="summary-section"></div>
+</div>
+
+<!-- HISTORY SECTION -->
+<div id="history-section" class="section">
+  <div id="history-container"></div>
+</div>
+
+<!-- SETTINGS SECTION -->
+<div id="settings-section" class="section">
+  <div class="settings-group">
+    <h3>Current Goal</h3>
+    <select id="goal-select">
+      <option value="strength">Strength — Heavy compounds, low reps</option>
+      <option value="hypertrophy">Hypertrophy — Muscle building, moderate reps</option>
+      <option value="weight-loss">Weight Loss — High reps, short rest</option>
+      <option value="mobility">Mobility — Full ROM, lighter loads</option>
+      <option value="general" selected>General Fitness — Balanced</option>
+    </select>
+  </div>
+  <div class="settings-group">
+    <h3>Your Email</h3>
+    <input type="email" id="email-input" placeholder="your@email.com" />
+    <p style="font-size:12px; color:var(--text-dim); margin-top:4px;">Used for sending workout logs</p>
+  </div>
+  <button class="save-settings-btn" onclick="saveSettings()">Save Settings</button>
+</div>
+
+<!-- RPE MODAL -->
+<div class="modal-overlay" id="rpe-modal">
+  <div class="modal">
+    <h3>How hard was that?</h3>
+    <p>Rate of Perceived Exertion (RPE)</p>
+    <div class="rpe-grid">
+      <div class="rpe-option rpe-1-3" onclick="selectRPE(1)">1<span class="rpe-desc">Very Easy</span></div>
+      <div class="rpe-option rpe-1-3" onclick="selectRPE(2)">2<span class="rpe-desc">Easy</span></div>
+      <div class="rpe-option rpe-1-3" onclick="selectRPE(3)">3<span class="rpe-desc">Light</span></div>
+      <div class="rpe-option rpe-4-6" onclick="selectRPE(4)">4<span class="rpe-desc">Moderate</span></div>
+      <div class="rpe-option rpe-4-6" onclick="selectRPE(5)">5<span class="rpe-desc">Medium</span></div>
+      <div class="rpe-option rpe-4-6" onclick="selectRPE(6)">6<span class="rpe-desc">Tough</span></div>
+      <div class="rpe-option rpe-7-8" onclick="selectRPE(7)">7<span class="rpe-desc">Hard</span></div>
+      <div class="rpe-option rpe-7-8" onclick="selectRPE(8)">8<span class="rpe-desc">V.Hard</span></div>
+      <div class="rpe-option rpe-9-10" onclick="selectRPE(9)">9<span class="rpe-desc">Max Eff.</span></div>
+      <div class="rpe-option rpe-9-10" onclick="selectRPE(10)">10<span class="rpe-desc">Failure</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==================== STATE ====================
+let workoutPlan = null;
+let todayWorkout = null;
+let workoutLog = {};
+let restTimerInterval = null;
+let currentRPETarget = null; // { exerciseIdx, setIdx }
+let settings = {
+  goal: 'general',
+  email: ''
+};
+
+// ==================== INIT ====================
+function init() {
+  loadSettings();
+  loadPlanFromLocalStorage();
+  renderToday();
+  renderHistory();
+}
+
+function loadSettings() {
+  const saved = localStorage.getItem('workout-settings');
+  if (saved) {
+    settings = JSON.parse(saved);
+    document.getElementById('goal-select').value = settings.goal;
+    document.getElementById('email-input').value = settings.email || '';
+    document.getElementById('goalBadge').textContent = settings.goal.replace('-', ' ');
+  }
+}
+
+function loadPlanFromLocalStorage() {
+  // Check for plan data in localStorage
+  const savedPlan = localStorage.getItem('weekly-plan');
+  if (savedPlan) {
+    workoutPlan = JSON.parse(savedPlan);
+  } else {
+    // Default demo plan for first use — will be replaced by email/data
+    workoutPlan = getDefaultPlan();
+    localStorage.setItem('weekly-plan', JSON.stringify(workoutPlan));
+  }
+}
+
+function getDefaultPlan() {
+  // This will be overwritten when the actual weekly-plan.json is loaded
+  // For now, embed the initial plan
+  return {
+    "weekStartDate": "2026-04-06",
+    "goal": "general",
+    "days": [
+      {
+        "date": "2026-04-06", "dayOfWeek": "monday", "pattern": "push",
+        "label": "Push Day \u2014 Chest, Shoulders & Triceps",
+        "warmup": "5 min light cardio + arm circles + band pull-aparts",
+        "exercises": [
+          { "id": "barbell-bench-press", "name": "Barbell Bench Press", "sets": 3, "reps": "8-10", "restSeconds": 90, "targetWeight": null, "notes": "Warm up with bar, then working sets" },
+          { "id": "incline-dumbbell-press", "name": "Incline Dumbbell Press", "sets": 3, "reps": "8-10", "restSeconds": 90, "targetWeight": null, "notes": "30 degree incline, squeeze at top" },
+          { "id": "overhead-press", "name": "Overhead Press", "sets": 3, "reps": "8-10", "restSeconds": 90, "targetWeight": null, "notes": "Standing, brace core" },
+          { "id": "dumbbell-lateral-raise", "name": "Dumbbell Lateral Raise", "sets": 3, "reps": "10-12", "restSeconds": 60, "targetWeight": null, "notes": "Light weight, control the negative" },
+          { "id": "close-grip-bench-press", "name": "Close-Grip Bench Press", "sets": 3, "reps": "8-10", "restSeconds": 90, "targetWeight": null, "notes": "Hands shoulder-width apart" },
+          { "id": "dumbbell-tricep-overhead", "name": "Dumbbell Overhead Tricep Extension", "sets": 3, "reps": "10-12", "restSeconds": 60, "targetWeight": null, "notes": "Single DB, both hands, full stretch at bottom" }
+        ],
+        "cooldown": "Stretch chest, shoulders, and triceps \u2014 5 min"
+      },
+      {
+        "date": "2026-04-08", "dayOfWeek": "wednesday", "pattern": "pull",
+        "label": "Pull Day \u2014 Back, Biceps & Rear Delts",
+        "warmup": "5 min light cardio + band pull-aparts + cat-cow stretches",
+        "exercises": [
+          { "id": "barbell-row", "name": "Barbell Bent-Over Row", "sets": 3, "reps": "8-10", "restSeconds": 90, "targetWeight": null, "notes": "Hinge at hips, pull to lower chest" },
+          { "id": "dumbbell-row", "name": "Dumbbell Single-Arm Row", "sets": 3, "reps": "8-10", "restSeconds": 75, "targetWeight": null, "notes": "Each side, squeeze at top" },
+          { "id": "dumbbell-pullover", "name": "Dumbbell Pullover", "sets": 3, "reps": "10-12", "restSeconds": 75, "targetWeight": null, "notes": "Feel the lat stretch, control the arc" },
+          { "id": "dumbbell-reverse-flye", "name": "Dumbbell Reverse Flye", "sets": 3, "reps": "12-15", "restSeconds": 60, "targetWeight": null, "notes": "Bent over, light weight, squeeze shoulder blades" },
+          { "id": "barbell-curl", "name": "Barbell Curl", "sets": 3, "reps": "8-10", "restSeconds": 75, "targetWeight": null, "notes": "Strict form, no swinging" },
+          { "id": "hammer-curl", "name": "Hammer Curl", "sets": 3, "reps": "10-12", "restSeconds": 60, "targetWeight": null, "notes": "Neutral grip, targets brachialis" }
+        ],
+        "cooldown": "Stretch lats, biceps, and upper back \u2014 5 min"
+      },
+      {
+        "date": "2026-04-10", "dayOfWeek": "friday", "pattern": "legs",
+        "label": "Leg Day \u2014 Quads, Hamstrings, Glutes & Core",
+        "warmup": "5 min light cardio + bodyweight squats + leg swings",
+        "exercises": [
+          { "id": "barbell-squat", "name": "Barbell Back Squat", "sets": 3, "reps": "8-10", "restSeconds": 120, "targetWeight": null, "notes": "Warm up with bar, below parallel" },
+          { "id": "romanian-deadlift", "name": "Romanian Deadlift", "sets": 3, "reps": "8-10", "restSeconds": 90, "targetWeight": null, "notes": "Slight knee bend, feel hamstring stretch" },
+          { "id": "bulgarian-split-squat", "name": "Bulgarian Split Squat", "sets": 3, "reps": "10-12", "restSeconds": 75, "targetWeight": null, "notes": "Each leg, rear foot on bench" },
+          { "id": "barbell-hip-thrust", "name": "Barbell Hip Thrust", "sets": 3, "reps": "10-12", "restSeconds": 75, "targetWeight": null, "notes": "Back on bench, squeeze glutes at top" },
+          { "id": "dumbbell-calf-raises", "name": "Dumbbell Calf Raises", "sets": 3, "reps": "15-20", "restSeconds": 45, "targetWeight": null, "notes": "Full ROM, pause at top" },
+          { "id": "hanging-leg-raise", "name": "Hanging Leg Raise", "sets": 3, "reps": "10-15", "restSeconds": 60, "targetWeight": null, "notes": "Control the swing, slow negative" }
+        ],
+        "cooldown": "Stretch quads, hamstrings, hip flexors \u2014 5 min"
+      }
+    ]
+  };
+}
+
+// ==================== RENDER ====================
+function renderToday() {
+  const today = getTodayString();
+  const dayNames = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+  const todayName = dayNames[new Date().getDay()];
+
+  // Find today's workout
+  todayWorkout = null;
+  if (workoutPlan && workoutPlan.days) {
+    todayWorkout = workoutPlan.days.find(d => d.dayOfWeek === todayName);
+  }
+
+  // Also check if there's a saved log for today
+  const savedLog = localStorage.getItem('log-' + today);
+  if (savedLog) {
+    workoutLog = JSON.parse(savedLog);
+  } else {
+    workoutLog = {};
+  }
+
+  const dateEl = document.getElementById('dateSubtitle');
+  dateEl.textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+
+  if (!todayWorkout) {
+    document.getElementById('dayTitle').textContent = 'Rest Day';
+    document.getElementById('exercises-container').innerHTML = `
+      <div class="empty-state">
+        <div class="icon">&#128164;</div>
+        <p>No workout scheduled today.<br>Enjoy your rest!</p>
+      </div>`;
+    document.getElementById('warmup-box').style.display = 'none';
+    document.getElementById('cooldown-box').style.display = 'none';
+    document.getElementById('complete-btn').style.display = 'none';
+    return;
+  }
+
+  document.getElementById('dayTitle').textContent = todayWorkout.label;
+  document.getElementById('warmup-box').innerHTML = '<strong>Warmup:</strong> ' + todayWorkout.warmup;
+  document.getElementById('cooldown-box').innerHTML = '<strong>Cooldown:</strong> ' + todayWorkout.cooldown;
+
+  const container = document.getElementById('exercises-container');
+  container.innerHTML = '';
+
+  todayWorkout.exercises.forEach((ex, exIdx) => {
+    const logKey = 'ex-' + exIdx;
+    const exLog = workoutLog[logKey] || {};
+    const completedSets = Object.keys(exLog).filter(k => k.startsWith('set-')).length;
+    const allDone = completedSets >= ex.sets;
+    const anyDone = completedSets > 0;
+
+    const card = document.createElement('div');
+    card.className = 'exercise-card' + (allDone ? ' completed' : anyDone ? ' in-progress' : '');
+    card.innerHTML = `
+      <div class="exercise-header" onclick="toggleSets(${exIdx})">
+        <div>
+          <div class="name">${ex.name}</div>
+          <div class="prescription">${ex.sets} sets x ${ex.reps} reps &middot; ${ex.restSeconds}s rest</div>
+        </div>
+        <div class="status-icon ${allDone ? 'status-done' : anyDone ? 'status-active' : 'status-pending'}">
+          ${allDone ? '&#10003;' : anyDone ? completedSets + '/' + ex.sets : ex.sets}
+        </div>
+      </div>
+      <div class="sets-container" id="sets-${exIdx}">
+        ${ex.targetWeight ? `<div class="target-weight-display">Target weight: <strong>${ex.targetWeight} lbs</strong> (based on last week)</div>` : ''}
+        <div class="exercise-notes">${ex.notes}</div>
+        ${renderSets(ex, exIdx, exLog)}
+      </div>`;
+    container.appendChild(card);
+  });
+
+  updateCompleteButton();
+}
+
+function renderSets(exercise, exIdx, exLog) {
+  let html = '';
+  for (let s = 0; s < exercise.sets; s++) {
+    const setKey = 'set-' + s;
+    const logged = exLog[setKey];
+    const isLogged = !!logged;
+
+    html += `
+    <div class="set-row ${isLogged ? 'logged' : ''}" id="setrow-${exIdx}-${s}">
+      <div class="set-label">Set ${s + 1}</div>
+      <div class="input-group">
+        <div class="input-wrap">
+          <label>LBS</label>
+          <input type="number" inputmode="decimal" id="weight-${exIdx}-${s}"
+            value="${isLogged ? logged.weight : (exercise.targetWeight || '')}"
+            placeholder="-" ${isLogged ? 'readonly' : ''} />
+        </div>
+        <div class="input-wrap">
+          <label>REPS</label>
+          <input type="number" inputmode="numeric" id="reps-${exIdx}-${s}"
+            value="${isLogged ? logged.reps : ''}"
+            placeholder="${exercise.reps}" ${isLogged ? 'readonly' : ''} />
+        </div>
+        <div class="rpe-wrap">
+          <label>RPE</label>
+          <div class="rpe-btn" id="rpe-${exIdx}-${s}"
+            onclick="${isLogged ? '' : `openRPE(${exIdx}, ${s})`}"
+            style="${isLogged ? 'pointer-events:none' : 'cursor:pointer'}">
+            ${isLogged ? logged.rpe : '-'}
+          </div>
+        </div>
+      </div>
+      <button class="set-done-btn ${isLogged ? 'checked' : ''}"
+        id="donebtn-${exIdx}-${s}"
+        onclick="logSet(${exIdx}, ${s})"
+        ${isLogged ? 'disabled' : ''}>
+        ${isLogged ? '&#10003;' : '&#10003;'}
+      </button>
+    </div>`;
+  }
+  return html;
+}
+
+// ==================== INTERACTIONS ====================
+function toggleSets(exIdx) {
+  const el = document.getElementById('sets-' + exIdx);
+  el.classList.toggle('open');
+}
+
+function openRPE(exIdx, setIdx) {
+  currentRPETarget = { exIdx, setIdx };
+  document.getElementById('rpe-modal').classList.add('open');
+}
+
+function selectRPE(value) {
+  if (currentRPETarget) {
+    document.getElementById(`rpe-${currentRPETarget.exIdx}-${currentRPETarget.setIdx}`).textContent = value;
+  }
+  document.getElementById('rpe-modal').classList.remove('open');
+  currentRPETarget = null;
+}
+
+// Close modal on backdrop tap
+document.getElementById('rpe-modal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    this.classList.remove('open');
+    currentRPETarget = null;
+  }
+});
+
+function logSet(exIdx, setIdx) {
+  const weight = document.getElementById(`weight-${exIdx}-${setIdx}`).value;
+  const reps = document.getElementById(`reps-${exIdx}-${setIdx}`).value;
+  const rpe = document.getElementById(`rpe-${exIdx}-${setIdx}`).textContent.trim();
+
+  if (!weight || !reps) {
+    // Highlight empty fields
+    if (!weight) document.getElementById(`weight-${exIdx}-${setIdx}`).style.borderColor = 'var(--danger)';
+    if (!reps) document.getElementById(`reps-${exIdx}-${setIdx}`).style.borderColor = 'var(--danger)';
+    return;
+  }
+
+  if (rpe === '-') {
+    openRPE(exIdx, setIdx);
+    // After RPE is selected, auto-log
+    const origSelect = window.selectRPE;
+    window.selectRPE = function(value) {
+      document.getElementById(`rpe-${exIdx}-${setIdx}`).textContent = value;
+      document.getElementById('rpe-modal').classList.remove('open');
+      currentRPETarget = null;
+      window.selectRPE = origSelect;
+      // Now actually log
+      doLogSet(exIdx, setIdx, weight, reps, value);
+    };
+    return;
+  }
+
+  doLogSet(exIdx, setIdx, weight, reps, parseInt(rpe));
+}
+
+function doLogSet(exIdx, setIdx, weight, reps, rpe) {
+  const logKey = 'ex-' + exIdx;
+  if (!workoutLog[logKey]) workoutLog[logKey] = {};
+  workoutLog[logKey]['set-' + setIdx] = {
+    weight: parseFloat(weight),
+    reps: parseInt(reps),
+    rpe: rpe,
+    timestamp: new Date().toISOString()
+  };
+
+  // Save to localStorage
+  const today = getTodayString();
+  localStorage.setItem('log-' + today, JSON.stringify(workoutLog));
+
+  // Update UI
+  const row = document.getElementById(`setrow-${exIdx}-${setIdx}`);
+  row.classList.add('logged');
+  document.getElementById(`weight-${exIdx}-${setIdx}`).readOnly = true;
+  document.getElementById(`reps-${exIdx}-${setIdx}`).readOnly = true;
+  document.getElementById(`rpe-${exIdx}-${setIdx}`).style.pointerEvents = 'none';
+  const btn = document.getElementById(`donebtn-${exIdx}-${setIdx}`);
+  btn.classList.add('checked');
+  btn.disabled = true;
+
+  // Start rest timer
+  const exercise = todayWorkout.exercises[exIdx];
+  const isLastSet = setIdx >= exercise.sets - 1;
+  if (!isLastSet) {
+    startRestTimer(exercise.restSeconds);
+  }
+
+  // Update card status
+  renderToday();
+}
+
+// ==================== REST TIMER ====================
+function startRestTimer(seconds) {
+  clearInterval(restTimerInterval);
+  const timerEl = document.getElementById('rest-timer');
+  const displayEl = document.getElementById('timer-display');
+  timerEl.classList.add('active');
+  timerEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  let remaining = seconds;
+  displayEl.textContent = formatTime(remaining);
+
+  restTimerInterval = setInterval(() => {
+    remaining--;
+    displayEl.textContent = formatTime(remaining);
+    if (remaining <= 0) {
+      clearInterval(restTimerInterval);
+      timerEl.classList.remove('active');
+      // Vibrate if available
+      if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+    }
+  }, 1000);
+}
+
+function skipTimer() {
+  clearInterval(restTimerInterval);
+  document.getElementById('rest-timer').classList.remove('active');
+}
+
+function formatTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+// ==================== COMPLETE WORKOUT ====================
+function updateCompleteButton() {
+  if (!todayWorkout) return;
+  const totalSets = todayWorkout.exercises.reduce((sum, ex) => sum + ex.sets, 0);
+  let completedSets = 0;
+  todayWorkout.exercises.forEach((ex, exIdx) => {
+    const logKey = 'ex-' + exIdx;
+    if (workoutLog[logKey]) {
+      completedSets += Object.keys(workoutLog[logKey]).filter(k => k.startsWith('set-')).length;
+    }
+  });
+  const btn = document.getElementById('complete-btn');
+  btn.textContent = completedSets >= totalSets ? 'Complete Workout' : `Complete Workout (${completedSets}/${totalSets} sets)`;
+}
+
+function completeWorkout() {
+  if (!todayWorkout) return;
+
+  const summary = buildSummary();
+  const summarySection = document.getElementById('summary-section');
+  summarySection.innerHTML = summary;
+  summarySection.classList.add('active');
+  document.getElementById('complete-btn').style.display = 'none';
+
+  summarySection.scrollIntoView({ behavior: 'smooth' });
+}
+
+function buildSummary() {
+  const today = getTodayString();
+  let totalVolume = 0;
+  let totalSets = 0;
+  let avgRPE = 0;
+  let rpeCount = 0;
+  let exerciseSummaries = [];
+
+  todayWorkout.exercises.forEach((ex, exIdx) => {
+    const logKey = 'ex-' + exIdx;
+    const exLog = workoutLog[logKey] || {};
+    let exSets = [];
+
+    for (let s = 0; s < ex.sets; s++) {
+      const setData = exLog['set-' + s];
+      if (setData) {
+        exSets.push(setData);
+        totalVolume += setData.weight * setData.reps;
+        totalSets++;
+        if (setData.rpe) { avgRPE += setData.rpe; rpeCount++; }
+      }
+    }
+
+    if (exSets.length > 0) {
+      exerciseSummaries.push({
+        name: ex.name,
+        sets: exSets
+      });
+    }
+  });
+
+  avgRPE = rpeCount > 0 ? (avgRPE / rpeCount).toFixed(1) : 'N/A';
+
+  let html = `
+    <h2>Workout Complete!</h2>
+    <div class="summary-card">
+      <h4>Session Stats</h4>
+      <div class="stat-row"><span class="stat-label">Total Volume</span><span class="stat-value">${totalVolume.toLocaleString()} lbs</span></div>
+      <div class="stat-row"><span class="stat-label">Sets Completed</span><span class="stat-value">${totalSets}</span></div>
+      <div class="stat-row"><span class="stat-label">Avg RPE</span><span class="stat-value">${avgRPE}</span></div>
+    </div>`;
+
+  exerciseSummaries.forEach(ex => {
+    html += `<div class="summary-card"><h4>${ex.name}</h4>`;
+    ex.sets.forEach((s, i) => {
+      html += `<div class="stat-row"><span class="stat-label">Set ${i+1}</span><span class="stat-value">${s.weight} lbs x ${s.reps} @ RPE ${s.rpe}</span></div>`;
+    });
+    html += `</div>`;
+  });
+
+  // Email button
+  const emailBody = buildEmailBody(exerciseSummaries, totalVolume, totalSets, avgRPE);
+  const subject = encodeURIComponent(`Workout Log ${today}`);
+  const body = encodeURIComponent(emailBody);
+  const emailAddr = settings.email || '';
+  const mailto = `mailto:${emailAddr}?subject=${subject}&body=${body}`;
+
+  html += `<a class="email-btn" href="${mailto}">Email Workout Log</a>`;
+
+  return html;
+}
+
+function buildEmailBody(exercises, totalVolume, totalSets, avgRPE) {
+  const today = getTodayString();
+  let body = `WORKOUT LOG - ${today}\n`;
+  body += `${todayWorkout.label}\n`;
+  body += `Goal: ${settings.goal}\n`;
+  body += `\n--- RESULTS ---\n\n`;
+
+  exercises.forEach(ex => {
+    body += `${ex.name}\n`;
+    ex.sets.forEach((s, i) => {
+      body += `  Set ${i+1}: ${s.weight} lbs x ${s.reps} reps @ RPE ${s.rpe}\n`;
+    });
+    body += `\n`;
+  });
+
+  body += `--- SUMMARY ---\n`;
+  body += `Total Volume: ${totalVolume.toLocaleString()} lbs\n`;
+  body += `Sets Completed: ${totalSets}\n`;
+  body += `Average RPE: ${avgRPE}\n`;
+
+  return body;
+}
+
+// ==================== HISTORY ====================
+function renderHistory() {
+  const container = document.getElementById('history-container');
+  const logs = [];
+
+  // Scan localStorage for log entries
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key.startsWith('log-')) {
+      const date = key.replace('log-', '');
+      logs.push({ date, data: JSON.parse(localStorage.getItem(key)) });
+    }
+  }
+
+  logs.sort((a, b) => b.date.localeCompare(a.date));
+
+  if (logs.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="icon">&#128203;</div>
+        <p>No workout history yet.<br>Complete a workout to see it here!</p>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = '';
+  logs.forEach(log => {
+    const entry = document.createElement('div');
+    entry.className = 'history-entry';
+
+    let setCount = 0;
+    let volume = 0;
+    Object.keys(log.data).forEach(exKey => {
+      Object.keys(log.data[exKey]).forEach(setKey => {
+        if (setKey.startsWith('set-')) {
+          const s = log.data[exKey][setKey];
+          setCount++;
+          volume += s.weight * s.reps;
+        }
+      });
+    });
+
+    entry.innerHTML = `
+      <h4>${new Date(log.date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}</h4>
+      <div class="detail">${setCount} sets &middot; ${volume.toLocaleString()} lbs total volume</div>`;
+    container.appendChild(entry);
+  });
+}
+
+// ==================== SETTINGS ====================
+function saveSettings() {
+  settings.goal = document.getElementById('goal-select').value;
+  settings.email = document.getElementById('email-input').value;
+  localStorage.setItem('workout-settings', JSON.stringify(settings));
+  document.getElementById('goalBadge').textContent = settings.goal.replace('-', ' ');
+
+  // Offer to email the goal change
+  const subject = encodeURIComponent(`Goal Change: ${settings.goal}`);
+  const body = encodeURIComponent(`I'm changing my workout goal to: ${settings.goal}\n\nPlease update my next week's plan accordingly.`);
+  const mailto = `mailto:${settings.email}?subject=${subject}&body=${body}`;
+
+  if (confirm('Settings saved! Send a goal-change email so Claude picks it up in the weekly review?')) {
+    window.location.href = mailto;
+  }
+}
+
+// ==================== NAV ====================
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(name + '-section').classList.add('active');
+  event.target.classList.add('active');
+  if (name === 'history') renderHistory();
+}
+
+// ==================== UTILS ====================
+function getTodayString() {
+  const d = new Date();
+  return d.getFullYear() + '-' +
+    String(d.getMonth() + 1).padStart(2, '0') + '-' +
+    String(d.getDate()).padStart(2, '0');
+}
+
+// ==================== PLAN IMPORT ====================
+// Paste plan JSON into console: importPlan({...})
+window.importPlan = function(planData) {
+  localStorage.setItem('weekly-plan', JSON.stringify(planData));
+  workoutPlan = planData;
+  renderToday();
+  console.log('Plan imported successfully!');
+};
+
+// ==================== START ====================
+init();
+</script>
+</body>
+</html>
