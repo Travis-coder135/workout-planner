@@ -115,13 +115,13 @@
           "notes": "Bent over, light weight, squeeze shoulder blades"
         },
         {
-          "id": "barbell-curl",
-          "name": "Barbell Curl",
+          "id": "ez-bar-curl",
+          "name": "EZ Bar Curl",
           "sets": 3,
           "reps": "8-10",
           "restSeconds": 75,
           "targetWeight": null,
-          "notes": "Strict form, no swinging"
+          "notes": "Strict form, no swinging. EZ bar is easier on the wrists."
         },
         {
           "id": "hammer-curl",

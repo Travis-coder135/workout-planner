@@ -223,15 +223,15 @@
       "notes": "Bent over, squeeze shoulder blades"
     },
     {
-      "id": "barbell-curl",
-      "name": "Barbell Curl",
+      "id": "ez-bar-curl",
+      "name": "EZ Bar Curl",
       "muscleGroup": "biceps",
       "pattern": "pull",
-      "equipment": "barbell",
+      "equipment": "curl-bar",
       "compound": false,
       "goals": ["hypertrophy", "strength"],
       "difficulty": "beginner",
-      "notes": "Strict form, no swinging"
+      "notes": "Strict form, no swinging. EZ bar is easier on the wrists."
     },
     {
       "id": "dumbbell-curl",
