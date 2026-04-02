@@ -11,6 +11,7 @@
     "legs": "barbell-squat"
   },
   "equipment": ["barbell", "dumbbell", "curl-bar", "power-rack", "pull-up-bar", "bodyweight"],
+  "highRPEWeeks": 0,
   "currentWeekRotation": 0,
   "sessionDurationMinutes": 45,
   "emailTime": "06:00",
