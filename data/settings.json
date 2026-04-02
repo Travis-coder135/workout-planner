@@ -5,6 +5,11 @@
   "availableGoals": ["strength", "hypertrophy", "weight-loss", "mobility", "general"],
   "workoutDays": ["monday", "wednesday", "friday"],
   "splitRotation": ["push", "pull", "legs"],
+  "pinnedExercises": {
+    "push": "barbell-bench-press",
+    "pull": "barbell-deadlift",
+    "legs": "barbell-squat"
+  },
   "currentWeekRotation": 0,
   "sessionDurationMinutes": 45,
   "emailTime": "06:00",

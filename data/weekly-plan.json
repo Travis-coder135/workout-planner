@@ -19,6 +19,7 @@
           "reps": "8-10",
           "restSeconds": 90,
           "targetWeight": null,
+          "pinned": true,
           "notes": "Warm up with bar, then working sets. First week — establish your baseline weight."
         },
         {
@@ -77,13 +78,14 @@
       "warmup": "5 min light cardio + band pull-aparts + cat-cow stretches",
       "exercises": [
         {
-          "id": "barbell-row",
-          "name": "Barbell Bent-Over Row",
+          "id": "barbell-deadlift",
+          "name": "Barbell Deadlift",
           "sets": 3,
           "reps": "8-10",
-          "restSeconds": 90,
+          "restSeconds": 120,
           "targetWeight": null,
-          "notes": "Hinge at hips, pull to lower chest"
+          "pinned": true,
+          "notes": "Conventional or sumo, hinge at hips. First week — establish your baseline."
         },
         {
           "id": "dumbbell-row",
@@ -147,7 +149,8 @@
           "reps": "8-10",
           "restSeconds": 120,
           "targetWeight": null,
-          "notes": "Warm up with bar, below parallel"
+          "pinned": true,
+          "notes": "Warm up with bar, below parallel. First week — establish your baseline."
         },
         {
           "id": "romanian-deadlift",
