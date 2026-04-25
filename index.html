@@ -185,6 +185,20 @@
     background: rgba(102, 187, 106, 0.15);
     border: 1px solid rgba(102, 187, 106, 0.3);
   }
+  .set-row.dirty {
+    background: rgba(255, 167, 38, 0.15);
+    border: 1px solid rgba(255, 167, 38, 0.5);
+  }
+  .set-row.dirty .set-done-btn {
+    background: var(--warning);
+    border-color: var(--warning);
+    color: #fff;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
 
   .set-label {
     font-size: 13px;
@@ -707,19 +721,19 @@ function renderSets(exercise, exIdx, exLog) {
           <label>LBS</label>
           <input type="number" inputmode="decimal" id="weight-${exIdx}-${s}"
             value="${isLogged ? logged.weight : (exercise.targetWeight || '')}"
-            placeholder="-" ${isLogged ? 'readonly' : ''} />
+            placeholder="-" oninput="markDirty(${exIdx}, ${s})" />
         </div>
         <div class="input-wrap">
           <label>REPS</label>
           <input type="number" inputmode="numeric" id="reps-${exIdx}-${s}"
             value="${isLogged ? logged.reps : ''}"
-            placeholder="${exercise.reps}" ${isLogged ? 'readonly' : ''} />
+            placeholder="${exercise.reps}" oninput="markDirty(${exIdx}, ${s})" />
         </div>
         <div class="rpe-wrap">
           <label>RPE</label>
           <div class="rpe-btn" id="rpe-${exIdx}-${s}"
-            onclick="${isLogged ? '' : `openRPE(${exIdx}, ${s})`}"
-            style="${isLogged ? 'pointer-events:none' : 'cursor:pointer'}">
+            onclick="openRPE(${exIdx}, ${s})"
+            style="cursor:pointer">
             ${isLogged ? logged.rpe : '-'}
           </div>
         </div>
@@ -727,7 +741,7 @@ function renderSets(exercise, exIdx, exLog) {
       <button class="set-done-btn ${isLogged ? 'checked' : ''}"
         id="donebtn-${exIdx}-${s}"
         onclick="logSet(${exIdx}, ${s})"
-        ${isLogged ? 'disabled' : ''}>
+        title="${isLogged ? 'Tap to update with new values' : 'Tap to log this set'}">
         ${isLogged ? '&#10003;' : '&#10003;'}
       </button>
     </div>`;
@@ -736,6 +750,13 @@ function renderSets(exercise, exIdx, exLog) {
 }
 
 // ==================== INTERACTIONS ====================
+function markDirty(exIdx, setIdx) {
+  const row = document.getElementById(`setrow-${exIdx}-${setIdx}`);
+  if (row && row.classList.contains('logged')) {
+    row.classList.add('dirty');
+  }
+}
+
 function toggleSets(exIdx) {
   const el = document.getElementById('sets-' + exIdx);
   el.classList.toggle('open');
@@ -806,21 +827,23 @@ function doLogSet(exIdx, setIdx, weight, reps, rpe) {
   const today = getTodayString();
   localStorage.setItem('log-' + today, JSON.stringify(workoutLog));
 
+  // Was this set already logged before? (editing vs first-time logging)
+  const wasAlreadyLogged = document.getElementById(`setrow-${exIdx}-${setIdx}`).classList.contains('logged');
+
   // Update UI
   const row = document.getElementById(`setrow-${exIdx}-${setIdx}`);
   row.classList.add('logged');
-  document.getElementById(`weight-${exIdx}-${setIdx}`).readOnly = true;
-  document.getElementById(`reps-${exIdx}-${setIdx}`).readOnly = true;
-  document.getElementById(`rpe-${exIdx}-${setIdx}`).style.pointerEvents = 'none';
+  row.classList.remove('dirty');
   const btn = document.getElementById(`donebtn-${exIdx}-${setIdx}`);
   btn.classList.add('checked');
-  btn.disabled = true;
 
-  // Start rest timer
-  const exercise = todayWorkout.exercises[exIdx];
-  const isLastSet = setIdx >= exercise.sets - 1;
-  if (!isLastSet) {
-    startRestTimer(exercise.restSeconds);
+  // Only start rest timer on first-time logging, not when editing
+  if (!wasAlreadyLogged) {
+    const exercise = todayWorkout.exercises[exIdx];
+    const isLastSet = setIdx >= exercise.sets - 1;
+    if (!isLastSet) {
+      startRestTimer(exercise.restSeconds);
+    }
   }
 
   // Update card status
