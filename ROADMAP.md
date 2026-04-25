@@ -4,29 +4,161 @@
 - Mobile-first HTML workout logger with RPE tracking
 - JSON-based data layer (exercise library, settings, weekly plan)
 - Daily workout email (Mon/Wed/Fri at 6 AM)
-- Weekly review with auto weight adjustments and exercise rotation
+- Weekly review with auto weight adjustments based on rep range + RPE
 - Pinned exercises: Bench (Mon), Deadlift (Wed), Squat (Fri)
+- Deload auto-detection for the big 3 (3 weeks of high RPE → deload)
+- Day picker for previewing any workout day
+- Live plan loading from GitHub repo
+- Editable logged sets
 
 ---
 
-## Future Builds
+## Future Builds (organized by theme)
 
-### Progress Dashboard
-- Visual charts showing weight progression per exercise over time
-- Trend lines for pinned lifts (bench, deadlift, squat)
-- Total volume per week graph
-- RPE trends (are workouts getting easier or harder?)
-- Personal records (PRs) tracking and highlights
-- Filter by exercise, muscle group, or date range
-- Could be a new tab in index.html or a separate page
+### Progress & Analytics
+- **Progress Dashboard tab** — charts showing weight progression per exercise over time
+- **Pinned-lift trend lines** — dedicated big graphs for bench/deadlift/squat
+- **Volume tracking** — total tonnage per week with trend
+- **RPE trends** — average RPE per week to spot when things are getting harder/easier
+- **Personal Records (PRs)** — auto-detect and celebrate new PRs (most weight, most volume, most reps)
+- **One-rep max estimator** — calculate estimated 1RM from logged sets using Epley/Brzycki formulas
+- **Strength standards comparison** — show how your big 3 compare to typical lifters at your bodyweight
+- **Workout streak counter** — consecutive weeks hitting all 3 sessions
+- **Heatmap calendar** — GitHub-style activity heatmap showing workout consistency
+- **Year-in-review** — annual summary with biggest wins and total volume moved
+- **Month-over-month comparison** — quick stats vs previous month
 
-### Other Ideas
-- Auto-send daily email (currently creates a draft — explore Google Apps Script to auto-send)
-- Google Sheets sync as a secondary database for easier data browsing
-- Weekly progress photo log
-- Body weight / measurement tracking
-- Running log integration for Thursdays
-- Rest day recovery tips or mobility routines
-- Deload week auto-detection (if RPE stays high for 3+ weeks, suggest a deload)
-- Exercise video/GIF links in the workout email for form reference
-- Superset and circuit support in the logger UI
+### Body Metrics & Health
+- **Bodyweight tracker** — daily/weekly entries with trend graph
+- **Body measurements** — chest, arms, waist, thighs, etc. over time
+- **Progress photo log** — weekly photos for visual progress comparison
+- **Body fat percentage** — tracked alongside bodyweight
+- **Sleep tracking** — log hours and quality, correlate with workout RPE
+- **Daily energy rating** — quick 1-5 score on workout days
+- **DOMS (soreness) tracking** — rate soreness per muscle group for recovery insights
+- **Recovery score** — combine sleep, soreness, RPE into a single readiness number
+
+### Smart Coaching
+- **AI form check** — upload a set video, get form feedback via vision model
+- **Plateau detection** — flag exercises where weight has been stuck for 4+ weeks
+- **Volume periodization** — auto-cycle volume across weeks (build → peak → deload)
+- **Goal-specific accessory recommendations** — different accessories for strength vs hypertrophy phases
+- **Chat with AI coach** — ask questions like "Should I add more back work?"
+- **Event-driven plan generation** — "I have a wedding in 12 weeks, focus on aesthetics"
+- **Vacation mode** — bodyweight-only plans for travel weeks
+- **Hotel gym mode** — adapt workouts to limited equipment
+
+### Workout Customization
+- **Drag-to-reorder** exercises mid-workout
+- **Add exercise on the fly** — quick-add a movement not in today's plan
+- **Skip with reason** — log why you skipped an exercise (injury, time, equipment)
+- **Substitute exercise** — swap out an exercise for an alternative
+- **Custom exercises** — add your own exercises to the library
+- **Multiple templates per day type** — alternate Push A and Push B routines
+- **Tempo prescription** — display tempo cues like "3-1-1-0" (eccentric-pause-concentric-pause)
+- **Drop sets** — log progressive weight drops within a set
+- **AMRAP sets** — log "as many reps as possible" finishers
+- **Time-based exercises** — for planks, holds, isometrics
+- **Cluster sets / rest-pause** — advanced set structures
+
+### UI / UX
+- **Voice logging** — say "180 by 8 RPE 7" instead of typing
+- **Plate calculator** — show what plates to load for a target weight
+- **Haptic feedback** — phone buzz on set completion and timer end
+- **PWA install** — "Add to Home Screen" prompt with proper icon
+- **Offline-first** — service worker for full offline functionality
+- **Set logging animation** — satisfying confirmation when a set is logged
+- **Auto-advance to next set** — focus moves automatically after logging
+- **Larger font mode** — accessibility option for older users or harsh gym lighting
+- **Landscape optimization** — better layout when phone is sideways
+- **Light mode option** — toggle for users who prefer it
+
+### Form & Technique
+- **Exercise demo videos** — embedded YouTube/GIF previews for each exercise
+- **Form cues panel** — key technique reminders shown while logging
+- **Common mistakes** — listed under each exercise for quick reference
+- **First-time tutorial** — guided form walkthrough when an exercise is new
+
+### Cardio & Mobility
+- **Running log for Thursdays** — separate cardio tracker integrated with the system
+- **Mobility routines** — daily 5-min stretches, especially on rest days
+- **Warmup library** — different warmup protocols per body part
+- **Cooldown stretches** — auto-suggested based on the day's exercises
+- **Cardio sessions** — log incline walks, runs, intervals
+
+### Notifications & Reminders
+- **Pre-workout reminder** — push notification 1 hour before scheduled time
+- **Forgot-to-log nudge** — if no log received by 8pm on a workout day
+- **Hydration reminders** — during long sessions
+- **Rest day mobility prompt** — gentle nudge to do mobility on off days
+- **Weekly review reminder** — Sunday evening prompt to send any unsent logs
+- **Push notifications via PWA** — without needing email at all
+
+### Recovery & Wellness
+- **HRV (heart rate variability) tracking** — readiness signal
+- **Foam rolling guides** — targeted by yesterday's workout
+- **Active recovery suggestions** — light activities for in-between days
+- **Stretch routines** — by muscle group worked
+- **Sleep correlation** — show how your sleep affects your RPE
+
+### Integrations
+- **Apple Health sync** — workout duration and calories
+- **Google Fit sync** — same as above for Android
+- **Strava integration** — auto-log Thursday runs
+- **MyFitnessPal sync** — pull calorie/macro data
+- **Smart scale** — auto-pull bodyweight from Withings/Eufy
+- **Wearable heart rate** — during-workout HR tracking
+- **Google Calendar** — auto-create workout events
+
+### Data & Export
+- **CSV export** — download all logs for analysis in Excel
+- **Printable weekly plan** — paper backup for the gym
+- **Backup to Google Drive** — automatic JSON backups
+- **Share workout link** — send a single workout to a friend
+- **Import from other apps** — Strong, Hevy, FitNotes, etc.
+- **Google Sheets sync** — secondary database for easy browsing
+
+### Habits & Lifestyle
+- **Macro tracking** — protein/carbs/fat goals based on training day
+- **Water intake** — daily ounces with reminders
+- **Step counter** — daily activity outside the gym
+- **Daily check-in** — mood, energy, motivation rating
+- **Habit streaks** — gamified consistency tracking
+
+### Voice & Hands-Free
+- **Voice commands** — "next set", "skip", "log 185 8 7"
+- **Read-aloud workout** — audio walkthrough at the start of session
+- **Audio rest timer** — voice countdown on the last 5 seconds
+- **Music integration** — start a Spotify playlist when workout begins
+
+### Programming Templates
+- **5/3/1 template** — Jim Wendler's classic strength program
+- **Westside conjugate** — max effort + dynamic effort split
+- **Linear progression** — Starting Strength / Stronglifts style
+- **Hypertrophy specialization** — focus blocks (e.g., "arms specialization")
+- **Powerlifting meet prep** — peaking protocol with timeline
+- **PHAT, PPL, Upper/Lower** — multiple split options to swap between
+
+### Email Improvements
+- **Auto-send daily email** — explore Google Apps Script or third-party SMTP
+- **Email customization** — pick what info to include
+- **Multiple recipients** — send to coach/trainer in addition to yourself
+- **Rich previous-week context** — "Last bench: 185x10 RPE 7, today: 190"
+
+### Equipment Features
+- **Plate inventory** — what plates you actually own (so calculator only shows realistic loads)
+- **Power rack height memory** — save your J-cup positions for bench, squat, etc.
+- **Equipment availability filter** — "only show what I have access to"
+- **Bar weight settings** — distinguish 45 lb Olympic vs 35 lb women's vs other bars
+
+### Variety & Engagement
+- **Random workout generator** — for when you want a one-off
+- **Challenge of the week** — fun mini-challenge (max push-ups, max rep test, etc.)
+- **Skill progressions** — work toward muscle-ups, pistol squats, etc.
+- **Bodyweight progressions** — push-up → diamond → archer → one-arm
+
+### Social & Accountability
+- **Share progress** — send a snapshot to a coach or friend
+- **Coach view** — read-only access for someone helping you
+- **Workout buddy mode** — log next to a partner in the same session
+- **Group challenges** — opt-in shared goals with friends
