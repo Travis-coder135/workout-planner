@@ -10,7 +10,7 @@
     "pull": "barbell-deadlift",
     "legs": "barbell-squat"
   },
-  "equipment": ["barbell", "dumbbell", "curl-bar", "power-rack", "pull-up-bar", "bodyweight"],
+  "equipment": ["barbell", "dumbbell", "curl-bar", "power-rack", "pull-up-bar", "cable", "lat-bar", "rope-attachment", "bodyweight"],
   "highRPEWeeks": 0,
   "currentWeekRotation": 1,
   "sessionDurationMinutes": 45,
