@@ -86,6 +86,38 @@
   .section { display: none; padding: 16px; }
   .section.active { display: block; }
 
+  /* Day selector */
+  .day-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    margin-bottom: 16px;
+  }
+  .day-selector label {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-weight: 600;
+  }
+  .day-selector select {
+    flex: 1;
+    background: var(--bg);
+    color: var(--text-bright);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 14px;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .day-selector.preview {
+    border-color: var(--warning);
+    background: rgba(255, 167, 38, 0.08);
+  }
+
   /* Warmup/Cooldown */
   .info-box {
     background: var(--surface2);
@@ -524,6 +556,15 @@
 
 <!-- WORKOUT SECTION -->
 <div id="workout-section" class="section active">
+  <div class="day-selector">
+    <label for="day-picker">Viewing:</label>
+    <select id="day-picker" onchange="changeDay(this.value)">
+      <option value="auto">Today (auto)</option>
+      <option value="monday">Monday — Push</option>
+      <option value="wednesday">Wednesday — Pull</option>
+      <option value="friday">Friday — Legs</option>
+    </select>
+  </div>
   <div id="warmup-box" class="info-box"></div>
   <div id="rest-timer" class="rest-timer">
     <div class="timer-label">Rest Timer</div>
@@ -634,10 +675,25 @@ async function loadPlan() {
 }
 
 // ==================== RENDER ====================
+let dayOverride = null; // null = auto, or 'monday'/'wednesday'/'friday'
+
+function changeDay(value) {
+  dayOverride = value === 'auto' ? null : value;
+  const sel = document.querySelector('.day-selector');
+  if (dayOverride) {
+    sel.classList.add('preview');
+  } else {
+    sel.classList.remove('preview');
+  }
+  renderToday();
+}
+
 function renderToday() {
   const today = getTodayString();
   const dayNames = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
-  const todayName = dayNames[new Date().getDay()];
+  const actualDayName = dayNames[new Date().getDay()];
+  const todayName = dayOverride || actualDayName;
+  const isPreview = dayOverride && dayOverride !== actualDayName;
 
   // Find today's workout
   todayWorkout = null;
@@ -645,8 +701,9 @@ function renderToday() {
     todayWorkout = workoutPlan.days.find(d => d.dayOfWeek === todayName);
   }
 
-  // Also check if there's a saved log for today
-  const savedLog = localStorage.getItem('log-' + today);
+  // Use a separate log key when previewing, so test logs don't pollute real data
+  const logKey = isPreview ? 'preview-log-' + todayName : 'log-' + today;
+  const savedLog = localStorage.getItem(logKey);
   if (savedLog) {
     workoutLog = JSON.parse(savedLog);
   } else {
@@ -662,12 +719,17 @@ function renderToday() {
       <div class="empty-state">
         <div class="icon">&#128164;</div>
         <p>No workout scheduled today.<br>Enjoy your rest!</p>
+        <p style="margin-top:16px;font-size:13px;">Want to preview another day? Use the dropdown above.</p>
       </div>`;
     document.getElementById('warmup-box').style.display = 'none';
     document.getElementById('cooldown-box').style.display = 'none';
     document.getElementById('complete-btn').style.display = 'none';
     return;
   }
+  // Reset display in case it was hidden
+  document.getElementById('warmup-box').style.display = '';
+  document.getElementById('cooldown-box').style.display = '';
+  document.getElementById('complete-btn').style.display = '';
 
   document.getElementById('dayTitle').textContent = todayWorkout.label;
   document.getElementById('warmup-box').innerHTML = '<strong>Warmup:</strong> ' + todayWorkout.warmup;
@@ -823,9 +885,12 @@ function doLogSet(exIdx, setIdx, weight, reps, rpe) {
     timestamp: new Date().toISOString()
   };
 
-  // Save to localStorage
-  const today = getTodayString();
-  localStorage.setItem('log-' + today, JSON.stringify(workoutLog));
+  // Save to localStorage (preview mode uses separate keys to keep test data isolated)
+  const dayNames = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+  const actualDayName = dayNames[new Date().getDay()];
+  const isPreview = dayOverride && dayOverride !== actualDayName;
+  const storageKey = isPreview ? 'preview-log-' + dayOverride : 'log-' + getTodayString();
+  localStorage.setItem(storageKey, JSON.stringify(workoutLog));
 
   // Was this set already logged before? (editing vs first-time logging)
   const wasAlreadyLogged = document.getElementById(`setrow-${exIdx}-${setIdx}`).classList.contains('logged');
