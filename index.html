@@ -6,6 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Workout Tracker</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
   :root {
     --bg: #121212;
@@ -520,17 +521,91 @@
     cursor: pointer;
   }
 
-  /* History */
-  .history-entry {
+  /* Progress dashboard */
+  .progress-heading {
+    color: var(--text-bright);
+    font-size: 16px;
+    font-weight: 600;
+    margin: 20px 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .progress-heading:first-child { margin-top: 0; }
+
+  .pr-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .pr-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 16px;
-    margin-bottom: 12px;
+    padding: 12px 8px;
+    text-align: center;
   }
-  .history-entry h4 { color: var(--text-bright); margin-bottom: 4px; }
-  .history-entry .date { color: var(--text-dim); font-size: 13px; margin-bottom: 8px; }
-  .history-entry .detail { font-size: 13px; color: var(--text); padding: 2px 0; }
+  .pr-card .pr-label {
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .pr-card .pr-weight {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.1;
+  }
+  .pr-card .pr-reps {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+  .pr-card .pr-1rm {
+    font-size: 11px;
+    color: var(--text);
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid var(--border);
+  }
+  .pr-card .pr-1rm strong { color: var(--success); }
+  .pr-card.empty .pr-weight { color: var(--text-dim); font-size: 14px; font-weight: 500; }
+
+  .chart-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+    position: relative;
+    min-height: 240px;
+  }
+  .chart-card canvas { max-height: 280px; }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+  }
+  .stat-card .stat-num {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-bright);
+    line-height: 1.1;
+  }
+  .stat-card .stat-name {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+  }
 
   .empty-state {
     text-align: center;
@@ -550,7 +625,7 @@
 
 <div class="nav">
   <button class="active" onclick="showSection('workout')">Workout</button>
-  <button onclick="showSection('history')">History</button>
+  <button onclick="showSection('progress')">Progress</button>
   <button onclick="showSection('settings')">Settings</button>
 </div>
 
@@ -579,9 +654,33 @@
   <div class="summary" id="summary-section"></div>
 </div>
 
-<!-- HISTORY SECTION -->
-<div id="history-section" class="section">
-  <div id="history-container"></div>
+<!-- PROGRESS SECTION -->
+<div id="progress-section" class="section">
+  <div id="progress-container">
+    <h2 class="progress-heading">Personal Records</h2>
+    <div class="pr-grid" id="pr-cards"></div>
+
+    <h2 class="progress-heading">Big 3 Progression</h2>
+    <div class="chart-card">
+      <canvas id="big3-chart"></canvas>
+      <div id="big3-empty" class="empty-state" style="display:none;">
+        <div class="icon">&#128202;</div>
+        <p>Bench/Deadlift/Squat trends will appear here<br>once you have a few sessions logged.</p>
+      </div>
+    </div>
+
+    <h2 class="progress-heading">Weekly Volume</h2>
+    <div class="chart-card">
+      <canvas id="volume-chart"></canvas>
+      <div id="volume-empty" class="empty-state" style="display:none;">
+        <div class="icon">&#128170;</div>
+        <p>Your weekly volume will be tracked here.</p>
+      </div>
+    </div>
+
+    <h2 class="progress-heading">Quick Stats</h2>
+    <div class="stats-grid" id="quick-stats"></div>
+  </div>
 </div>
 
 <!-- SETTINGS SECTION -->
@@ -641,7 +740,7 @@ async function init() {
   loadSettings();
   await loadPlan();
   renderToday();
-  renderHistory();
+  // Don't pre-render progress on load — it'll render when the tab is opened
 }
 
 function loadSettings() {
@@ -1061,53 +1160,330 @@ function buildEmailBody(exercises, totalVolume, totalSets, avgRPE) {
   return body;
 }
 
-// ==================== HISTORY ====================
-function renderHistory() {
-  const container = document.getElementById('history-container');
-  const logs = [];
+// ==================== PROGRESS DASHBOARD ====================
+let big3ChartInstance = null;
+let volumeChartInstance = null;
 
-  // Scan localStorage for log entries
+const PINNED_LIFTS = {
+  'barbell-bench-press': { label: 'Bench', color: '#4fc3f7' },
+  'barbell-deadlift':    { label: 'Deadlift', color: '#ef5350' },
+  'barbell-squat':       { label: 'Squat', color: '#ffa726' }
+};
+
+// Load all logs from localStorage + repo's data/history.json, merged by date
+async function loadAllLogs() {
+  const merged = {}; // date -> { exercises: [...] }
+
+  // 1. Repo history (past weeks)
+  try {
+    const res = await fetch('data/history.json?t=' + Date.now());
+    if (res.ok) {
+      const hist = await res.json();
+      if (hist.logs) {
+        hist.logs.forEach(log => { merged[log.date] = log; });
+      }
+    }
+  } catch (e) { /* offline or no history yet */ }
+
+  // 2. localStorage logs (current week takes precedence)
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
-    if (key.startsWith('log-')) {
-      const date = key.replace('log-', '');
-      logs.push({ date, data: JSON.parse(localStorage.getItem(key)) });
+    if (!key.startsWith('log-')) continue;
+    const date = key.replace('log-', '');
+    const raw = JSON.parse(localStorage.getItem(key));
+    merged[date] = convertLocalLogToHistory(date, raw);
+  }
+
+  return Object.values(merged).sort((a, b) => a.date.localeCompare(b.date));
+}
+
+// Convert localStorage log shape (ex-0: { set-0: {...} }) to history shape
+function convertLocalLogToHistory(date, raw) {
+  const exercises = [];
+  // Need today's plan to get exercise names — fall back to id if not available
+  Object.keys(raw).filter(k => k.startsWith('ex-')).forEach(exKey => {
+    const exIdx = parseInt(exKey.replace('ex-', ''));
+    const planEx = workoutPlan && workoutPlan.days
+      ? workoutPlan.days.flatMap(d => d.exercises)[exIdx]
+      : null;
+    const sets = [];
+    Object.keys(raw[exKey]).filter(k => k.startsWith('set-')).forEach(setKey => {
+      sets.push(raw[exKey][setKey]);
+    });
+    if (sets.length > 0) {
+      exercises.push({
+        id: planEx ? planEx.id : exKey,
+        name: planEx ? planEx.name : 'Exercise ' + (exIdx + 1),
+        sets
+      });
     }
+  });
+  return { date, exercises };
+}
+
+// Smarter version: scan for an exercise in any day of the plan by index alone won't work
+// because the index could match different exercises on different days. Use the plan
+// matching today's day-of-week from the date.
+function getPlanExerciseForLog(date, exIdx) {
+  if (!workoutPlan || !workoutPlan.days) return null;
+  const dayName = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'][new Date(date + 'T12:00:00').getDay()];
+  const day = workoutPlan.days.find(d => d.dayOfWeek === dayName);
+  return day ? day.exercises[exIdx] : null;
+}
+
+async function renderProgress() {
+  const logs = await loadAllLogs();
+
+  // Re-process localStorage logs with proper exercise lookup by date
+  const properLogs = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (!key.startsWith('log-')) continue;
+    const date = key.replace('log-', '');
+    const raw = JSON.parse(localStorage.getItem(key));
+    properLogs.push({
+      date,
+      exercises: rawLogToExercises(date, raw)
+    });
   }
 
-  logs.sort((a, b) => b.date.localeCompare(a.date));
+  // Merge repo + localStorage with localStorage taking precedence
+  const byDate = {};
+  logs.forEach(l => byDate[l.date] = l);
+  properLogs.forEach(l => byDate[l.date] = l);
+  const allLogs = Object.values(byDate).sort((a, b) => a.date.localeCompare(b.date));
 
-  if (logs.length === 0) {
-    container.innerHTML = `
-      <div class="empty-state">
-        <div class="icon">&#128203;</div>
-        <p>No workout history yet.<br>Complete a workout to see it here!</p>
-      </div>`;
-    return;
-  }
+  renderPRCards(allLogs);
+  renderBig3Chart(allLogs);
+  renderVolumeChart(allLogs);
+  renderQuickStats(allLogs);
+}
 
+function rawLogToExercises(date, raw) {
+  const exercises = [];
+  Object.keys(raw).filter(k => k.startsWith('ex-')).forEach(exKey => {
+    const exIdx = parseInt(exKey.replace('ex-', ''));
+    const planEx = getPlanExerciseForLog(date, exIdx);
+    const sets = [];
+    Object.keys(raw[exKey]).filter(k => k.startsWith('set-')).forEach(setKey => {
+      sets.push(raw[exKey][setKey]);
+    });
+    if (sets.length > 0) {
+      exercises.push({
+        id: planEx ? planEx.id : exKey,
+        name: planEx ? planEx.name : 'Exercise ' + (exIdx + 1),
+        sets
+      });
+    }
+  });
+  return exercises;
+}
+
+function renderPRCards(allLogs) {
+  const container = document.getElementById('pr-cards');
   container.innerHTML = '';
-  logs.forEach(log => {
-    const entry = document.createElement('div');
-    entry.className = 'history-entry';
 
-    let setCount = 0;
-    let volume = 0;
-    Object.keys(log.data).forEach(exKey => {
-      Object.keys(log.data[exKey]).forEach(setKey => {
-        if (setKey.startsWith('set-')) {
-          const s = log.data[exKey][setKey];
-          setCount++;
-          volume += s.weight * s.reps;
-        }
+  Object.keys(PINNED_LIFTS).forEach(liftId => {
+    const meta = PINNED_LIFTS[liftId];
+    const allSets = [];
+    allLogs.forEach(log => {
+      log.exercises.filter(e => e.id === liftId).forEach(ex => {
+        ex.sets.forEach(s => allSets.push(s));
       });
     });
 
-    entry.innerHTML = `
-      <h4>${new Date(log.date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}</h4>
-      <div class="detail">${setCount} sets &middot; ${volume.toLocaleString()} lbs total volume</div>`;
-    container.appendChild(entry);
+    const card = document.createElement('div');
+    card.className = 'pr-card' + (allSets.length === 0 ? ' empty' : '');
+
+    if (allSets.length === 0) {
+      card.innerHTML = `
+        <div class="pr-label">${meta.label} PR</div>
+        <div class="pr-weight">No data</div>
+        <div class="pr-reps">log to track</div>`;
+    } else {
+      // Heaviest single set (max weight, then most reps as tiebreaker)
+      const heaviest = allSets.reduce((best, s) =>
+        (s.weight > best.weight || (s.weight === best.weight && s.reps > best.reps)) ? s : best
+      );
+      // Estimated 1RM via Epley: weight × (1 + reps/30)
+      const est1RM = Math.round(allSets.reduce((max, s) =>
+        Math.max(max, s.weight * (1 + s.reps / 30)), 0
+      ));
+      card.innerHTML = `
+        <div class="pr-label">${meta.label} PR</div>
+        <div class="pr-weight">${heaviest.weight}<span style="font-size:13px;color:var(--text-dim);"> lbs</span></div>
+        <div class="pr-reps">${heaviest.reps} reps</div>
+        <div class="pr-1rm">est 1RM <strong>${est1RM} lbs</strong></div>`;
+    }
+    container.appendChild(card);
   });
+}
+
+function renderBig3Chart(allLogs) {
+  const ctx = document.getElementById('big3-chart');
+  const empty = document.getElementById('big3-empty');
+
+  // Build datasets: for each pinned lift, points are (date, top working set weight)
+  const datasets = Object.keys(PINNED_LIFTS).map(liftId => {
+    const meta = PINNED_LIFTS[liftId];
+    const points = [];
+    allLogs.forEach(log => {
+      log.exercises.filter(e => e.id === liftId).forEach(ex => {
+        const top = ex.sets.reduce((max, s) => s.weight > max ? s.weight : max, 0);
+        if (top > 0) points.push({ x: log.date, y: top });
+      });
+    });
+    return {
+      label: meta.label,
+      data: points,
+      borderColor: meta.color,
+      backgroundColor: meta.color + '33',
+      tension: 0.2,
+      pointRadius: 4,
+      pointHoverRadius: 6
+    };
+  });
+
+  const totalPoints = datasets.reduce((sum, d) => sum + d.data.length, 0);
+  if (totalPoints === 0) {
+    ctx.style.display = 'none';
+    empty.style.display = 'block';
+    if (big3ChartInstance) { big3ChartInstance.destroy(); big3ChartInstance = null; }
+    return;
+  }
+  ctx.style.display = '';
+  empty.style.display = 'none';
+
+  if (big3ChartInstance) big3ChartInstance.destroy();
+  big3ChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: { datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#e0e0e0' } },
+        tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${c.parsed.y} lbs` } }
+      },
+      scales: {
+        x: {
+          type: 'category',
+          ticks: { color: '#9e9e9e', maxRotation: 45 },
+          grid: { color: '#333' }
+        },
+        y: {
+          ticks: { color: '#9e9e9e', callback: (v) => v + ' lbs' },
+          grid: { color: '#333' }
+        }
+      }
+    }
+  });
+}
+
+function renderVolumeChart(allLogs) {
+  const ctx = document.getElementById('volume-chart');
+  const empty = document.getElementById('volume-empty');
+
+  // Group by ISO week (Monday as start)
+  const weekVolume = {};
+  allLogs.forEach(log => {
+    const d = new Date(log.date + 'T12:00:00');
+    const weekStart = getMonday(d);
+    const key = weekStart.toISOString().slice(0, 10);
+    if (!weekVolume[key]) weekVolume[key] = 0;
+    log.exercises.forEach(ex => {
+      ex.sets.forEach(s => { weekVolume[key] += (s.weight || 0) * (s.reps || 0); });
+    });
+  });
+
+  const sortedWeeks = Object.keys(weekVolume).sort();
+  const last8 = sortedWeeks.slice(-8);
+
+  if (last8.length === 0) {
+    ctx.style.display = 'none';
+    empty.style.display = 'block';
+    if (volumeChartInstance) { volumeChartInstance.destroy(); volumeChartInstance = null; }
+    return;
+  }
+  ctx.style.display = '';
+  empty.style.display = 'none';
+
+  const labels = last8.map(d => {
+    const dt = new Date(d + 'T12:00:00');
+    return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  });
+  const data = last8.map(k => weekVolume[k]);
+
+  if (volumeChartInstance) volumeChartInstance.destroy();
+  volumeChartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Volume (lbs)',
+        data,
+        backgroundColor: '#4fc3f7',
+        borderRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: (c) => c.parsed.y.toLocaleString() + ' lbs' } }
+      },
+      scales: {
+        x: { ticks: { color: '#9e9e9e' }, grid: { color: '#333' } },
+        y: {
+          ticks: { color: '#9e9e9e', callback: (v) => (v / 1000).toFixed(0) + 'k' },
+          grid: { color: '#333' }
+        }
+      }
+    }
+  });
+}
+
+function getMonday(d) {
+  const x = new Date(d);
+  const day = x.getDay();
+  const diff = x.getDate() - day + (day === 0 ? -6 : 1);
+  x.setDate(diff);
+  x.setHours(0, 0, 0, 0);
+  return x;
+}
+
+function renderQuickStats(allLogs) {
+  const container = document.getElementById('quick-stats');
+  let totalSets = 0, totalVolume = 0;
+  allLogs.forEach(log => log.exercises.forEach(ex => ex.sets.forEach(s => {
+    totalSets++;
+    totalVolume += (s.weight || 0) * (s.reps || 0);
+  })));
+
+  let daysSince = '—';
+  if (allLogs.length > 0) {
+    const last = new Date(allLogs[allLogs.length - 1].date + 'T12:00:00');
+    daysSince = Math.floor((Date.now() - last.getTime()) / (1000 * 60 * 60 * 24));
+  }
+
+  container.innerHTML = `
+    <div class="stat-card">
+      <div class="stat-num">${allLogs.length}</div>
+      <div class="stat-name">Workouts</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">${totalSets}</div>
+      <div class="stat-name">Total Sets</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">${(totalVolume / 1000).toFixed(1)}k</div>
+      <div class="stat-name">Total Volume (lbs)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">${daysSince}</div>
+      <div class="stat-name">Days Since Last</div>
+    </div>`;
 }
 
 // ==================== SETTINGS ====================
@@ -1133,7 +1509,7 @@ function showSection(name) {
   document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
   document.getElementById(name + '-section').classList.add('active');
   event.target.classList.add('active');
-  if (name === 'history') renderHistory();
+  if (name === 'progress') renderProgress();
 }
 
 // ==================== UTILS ====================
