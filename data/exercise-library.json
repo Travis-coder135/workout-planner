@@ -630,6 +630,17 @@
       "notes": "Squeeze quads at the top, controlled negative"
     },
     {
+      "id": "leg-curl",
+      "name": "Leg Curl",
+      "muscleGroup": "hamstrings",
+      "pattern": "legs",
+      "equipment": "leg-attachment",
+      "compound": false,
+      "goals": ["hypertrophy", "general"],
+      "difficulty": "beginner",
+      "notes": "Curl heels toward glutes, controlled, full ROM"
+    },
+    {
       "id": "dips",
       "name": "Dips",
       "muscleGroup": "chest",
