@@ -108,3 +108,4 @@ After the deload, weights return to pre-deload levels.
 
 - **Workout Logger**: https://travis-coder135.github.io/workout-planner/
 - **Manage Triggers**: https://claude.ai/code/scheduled
+- **Auto-Send Setup**: see [AUTO_SEND_SETUP.md](AUTO_SEND_SETUP.md) to send daily emails automatically without tapping send
