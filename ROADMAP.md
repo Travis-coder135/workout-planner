@@ -1,32 +1,33 @@
 # Workout Planner — Roadmap
 
-## Current System (v1)
-- Mobile-first HTML workout logger with RPE tracking
-- JSON-based data layer (exercise library, settings, weekly plan)
-- Daily workout email (Mon/Wed/Fri at 6 AM)
-- Weekly review with auto weight adjustments based on rep range + RPE
+## Current System
+- Mobile-first HTML workout logger with RPE tracking, hosted on GitHub Pages
+- JSON-based data layer (exercise library, settings, weekly plan, history)
+- ~60-exercise library with barbell, dumbbell, curl bar, cable/pulley, lat bar, rope, leg attachment, dip bars, and bodyweight movements
+- Daily workout email at 6 AM Mon/Wed/Fri with the "Open Workout Logger" button at the top
+- Nightly log ingestion (10 PM) — parses Workout Log emails into `data/history.json` so the dashboard works on any device
+- Weekly review (Sunday 7 PM) with auto weight adjustments based on rep range + RPE
 - Pinned exercises: Bench (Mon), Deadlift (Wed), Squat (Fri)
 - Deload auto-detection for the big 3 (3 weeks of high RPE → deload)
 - Day picker for previewing any workout day
-- Live plan loading from GitHub repo
-- Editable logged sets
+- Live plan loading from GitHub repo (no stale data)
+- Editable logged sets to fix mistakes
+- Auto-fill weight from previous logged set (cascades through subsequent sets)
+- **Progress dashboard tab** with PR cards (heaviest set + estimated 1RM), Big 3 progression line chart, weekly volume bar chart, and quick stats
+- Auto-send setup guide for the daily email via Google Apps Script
 
 ---
 
 ## Future Builds (organized by theme)
 
 ### Progress & Analytics
-- **Progress Dashboard tab** — charts showing weight progression per exercise over time
-- **Pinned-lift trend lines** — dedicated big graphs for bench/deadlift/squat
-- **Volume tracking** — total tonnage per week with trend
 - **RPE trends** — average RPE per week to spot when things are getting harder/easier
-- **Personal Records (PRs)** — auto-detect and celebrate new PRs (most weight, most volume, most reps)
-- **One-rep max estimator** — calculate estimated 1RM from logged sets using Epley/Brzycki formulas
 - **Strength standards comparison** — show how your big 3 compare to typical lifters at your bodyweight
 - **Workout streak counter** — consecutive weeks hitting all 3 sessions
 - **Heatmap calendar** — GitHub-style activity heatmap showing workout consistency
 - **Year-in-review** — annual summary with biggest wins and total volume moved
 - **Month-over-month comparison** — quick stats vs previous month
+- **PR celebrations** — animated highlight when you hit a new PR
 
 ### Body Metrics & Health
 - **Bodyweight tracker** — daily/weekly entries with trend graph
@@ -140,7 +141,6 @@
 - **PHAT, PPL, Upper/Lower** — multiple split options to swap between
 
 ### Email Improvements
-- **Auto-send daily email** — explore Google Apps Script or third-party SMTP
 - **Email customization** — pick what info to include
 - **Multiple recipients** — send to coach/trainer in addition to yourself
 - **Rich previous-week context** — "Last bench: 185x10 RPE 7, today: 190"
@@ -162,3 +162,19 @@
 - **Coach view** — read-only access for someone helping you
 - **Workout buddy mode** — log next to a partner in the same session
 - **Group challenges** — opt-in shared goals with friends
+
+---
+
+## Recently Completed
+- ✅ Progress Dashboard tab with charts
+- ✅ Pinned-lift trend lines (Big 3 chart)
+- ✅ Volume tracking (weekly volume bar chart)
+- ✅ Personal Records (PR cards)
+- ✅ One-rep max estimator (Epley formula)
+- ✅ Auto-send daily email (Apps Script guide in AUTO_SEND_SETUP.md)
+- ✅ Auto-fill weight from previous logged set
+- ✅ Cable / leg attachment / dip bar exercises added to library
+- ✅ Cross-device data persistence via nightly log ingestion
+- ✅ Editable logged sets to fix mistakes
+- ✅ Day picker to preview any workout day
+- ✅ Logger button at top of daily email
