@@ -619,6 +619,50 @@
       "notes": "Kneel facing pulley, rope behind head, crunch with abs not hips"
     },
     {
+      "id": "leg-extension",
+      "name": "Leg Extension",
+      "muscleGroup": "quads",
+      "pattern": "legs",
+      "equipment": "leg-attachment",
+      "compound": false,
+      "goals": ["hypertrophy", "general"],
+      "difficulty": "beginner",
+      "notes": "Squeeze quads at the top, controlled negative"
+    },
+    {
+      "id": "dips",
+      "name": "Dips",
+      "muscleGroup": "chest",
+      "pattern": "push",
+      "equipment": "dip-bars",
+      "compound": true,
+      "goals": ["strength", "hypertrophy", "general"],
+      "difficulty": "intermediate",
+      "notes": "Lean forward for chest, upright for triceps. Add weight via belt once bodyweight is easy."
+    },
+    {
+      "id": "tricep-dips",
+      "name": "Tricep Dips",
+      "muscleGroup": "triceps",
+      "pattern": "push",
+      "equipment": "dip-bars",
+      "compound": true,
+      "goals": ["strength", "hypertrophy"],
+      "difficulty": "intermediate",
+      "notes": "Stay upright, elbows tucked, full lockout at top"
+    },
+    {
+      "id": "captains-chair-knee-raise",
+      "name": "Captain's Chair Knee Raise",
+      "muscleGroup": "core",
+      "pattern": "legs",
+      "equipment": "dip-bars",
+      "compound": false,
+      "goals": ["hypertrophy", "strength", "general"],
+      "difficulty": "beginner",
+      "notes": "Forearms on dip bar pads, raise knees to chest, control the descent"
+    },
+    {
       "id": "straight-arm-pulldown",
       "name": "Straight-Arm Pulldown",
       "muscleGroup": "back",
