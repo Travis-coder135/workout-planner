@@ -55,7 +55,7 @@ After each week, Claude compares your logged reps to the prescribed rep range (e
 
 | What happened | Next week |
 |---------------|-----------|
-| All sets hit top of range (e.g. 10) + RPE ≤ 7 | **Go up** (+5-10 lbs barbell, +2.5-5 lbs dumbbell, +5 lbs curl bar) |
+| All sets hit top of range (e.g. 10) + RPE ≤ 7 | **Go up** (+5-10 lbs barbell, +5 lbs dumbbell, +5 lbs curl bar) |
 | All sets hit top of range + RPE 8+ | **Stay** — you got the reps but it was hard |
 | All sets within range but not all at top | **Stay** — keep building toward the top |
 | Any set below the range (even one) | **Drop 5-10%** — weight is too heavy |
