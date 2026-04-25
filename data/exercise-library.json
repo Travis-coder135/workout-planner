@@ -564,17 +564,6 @@
       "notes": "Use V-handle or close grip on lat bar, more biceps involvement"
     },
     {
-      "id": "cable-row",
-      "name": "Cable Row",
-      "muscleGroup": "back",
-      "pattern": "pull",
-      "equipment": "cable",
-      "compound": true,
-      "goals": ["hypertrophy", "general", "strength"],
-      "difficulty": "beginner",
-      "notes": "Seated or kneeling, pull to torso, squeeze shoulder blades"
-    },
-    {
       "id": "tricep-pushdown-rope",
       "name": "Tricep Rope Pushdown",
       "muscleGroup": "triceps",
@@ -619,39 +608,6 @@
       "notes": "Rope attachment at upper pulley, pull to face, external rotation at end"
     },
     {
-      "id": "cable-curl",
-      "name": "Cable Curl",
-      "muscleGroup": "biceps",
-      "pattern": "pull",
-      "equipment": "cable",
-      "compound": false,
-      "goals": ["hypertrophy", "general"],
-      "difficulty": "beginner",
-      "notes": "Bar attachment, low pulley, constant tension"
-    },
-    {
-      "id": "cable-hammer-curl-rope",
-      "name": "Cable Hammer Curl",
-      "muscleGroup": "biceps",
-      "pattern": "pull",
-      "equipment": "cable",
-      "compound": false,
-      "goals": ["hypertrophy", "general"],
-      "difficulty": "beginner",
-      "notes": "Rope attachment, neutral grip, targets brachialis"
-    },
-    {
-      "id": "cable-lateral-raise",
-      "name": "Cable Lateral Raise",
-      "muscleGroup": "shoulders",
-      "pattern": "push",
-      "equipment": "cable",
-      "compound": false,
-      "goals": ["hypertrophy"],
-      "difficulty": "intermediate",
-      "notes": "Single arm, low pulley, constant tension throughout ROM"
-    },
-    {
       "id": "cable-crunch",
       "name": "Cable Crunch",
       "muscleGroup": "core",
@@ -661,17 +617,6 @@
       "goals": ["hypertrophy", "general", "strength"],
       "difficulty": "beginner",
       "notes": "Kneel facing pulley, rope behind head, crunch with abs not hips"
-    },
-    {
-      "id": "cable-wood-chop",
-      "name": "Cable Wood Chop",
-      "muscleGroup": "core",
-      "pattern": "legs",
-      "equipment": "cable",
-      "compound": true,
-      "goals": ["general", "weight-loss", "mobility"],
-      "difficulty": "intermediate",
-      "notes": "High-to-low chop motion, rotate from torso, both sides"
     },
     {
       "id": "straight-arm-pulldown",
