@@ -101,6 +101,7 @@ After the deload, weights return to pre-deload levels.
 | Trigger | Schedule | What it does |
 |---------|----------|-------------|
 | Daily Workout Email | 6 AM Mon/Wed/Fri | Creates Gmail draft with today's workout + logger link |
+| Workout Log Ingestion | 10 PM nightly | Parses any new "Workout Log" emails into `data/history.json` so the dashboard works across devices |
 | Weekly Review | 7 PM Sunday | Reads Gmail logs, adjusts weights, rotates exercises, writes next week's plan, sends summary |
 
 ## Links
