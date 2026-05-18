@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "weekStartDate": "2026-05-04",
-  "weekEndDate": "2026-05-10",
+  "weekStartDate": "2026-05-18",
+  "weekEndDate": "2026-05-24",
   "goal": "general",
-  "rotationIndex": 2,
+  "rotationIndex": 3,
   "days": [
     {
-      "date": "2026-05-04",
+      "date": "2026-05-18",
       "dayOfWeek": "monday",
       "pattern": "push",
       "label": "Push Day — Chest, Shoulders & Triceps",
@@ -18,9 +18,9 @@
           "sets": 3,
           "reps": "8-10",
           "restSeconds": 90,
-          "targetWeight": 125,
+          "targetWeight": 130,
           "pinned": true,
-          "notes": "Staying at 125 — set 3 broke at 8 reps last week (bottom of range, RPE 9). Hit 10/10/10 with clean form to earn the bump next week."
+          "notes": "UP 5 lb from 125 — earned it with 10/10/10 RPE 7/7/7 last week. Clean technique, pause at chest, drive through heels."
         },
         {
           "id": "incline-dumbbell-press",
@@ -29,7 +29,7 @@
           "reps": "8-10",
           "restSeconds": 90,
           "targetWeight": 35,
-          "notes": "Staying at 35 — clean 10/10/10 but RPE 8 on first two sets. Get all sets to RPE 7 to go up. 30 degree incline."
+          "notes": "Staying at 35 — second week here. 10/10/10 at RPE 8 last week (top of range but too hard). Get all sets to RPE 7 to earn the bump to 40. 30 degree incline."
         },
         {
           "id": "dumbbell-shoulder-press",
@@ -38,7 +38,7 @@
           "reps": "8-10",
           "restSeconds": 90,
           "targetWeight": 25,
-          "notes": "NEW — rotating in for OHP this week. OHP was RPE 9-10 last week so giving the strict press a break. 25 lb DB each hand to start; adjust if first set is too easy or too hard."
+          "notes": "Staying at 25 — clean 10/10/10 but RPE 8 across the board. Dial in form and get to RPE 7 to bump up to 30."
         },
         {
           "id": "dumbbell-lateral-raise",
@@ -46,8 +46,8 @@
           "sets": 3,
           "reps": "10-12",
           "restSeconds": 60,
-          "targetWeight": null,
-          "notes": "Back to laterals after a week of front raises. Slight bend in elbows, control the negative. Pick a weight you can hit 10-12 with at RPE 7-8."
+          "targetWeight": 15,
+          "notes": "UP 5 lb from 10 — crushed 12/12/12 RPE 6/7/7 with the 10s. Big jump (50%) but DB increments are 5 lb minimum. If 15 feels brutal, drop back to 10 and ride out a few more weeks."
         },
         {
           "id": "close-grip-bench-press",
@@ -55,23 +55,23 @@
           "sets": 3,
           "reps": "8-10",
           "restSeconds": 90,
-          "targetWeight": 95,
-          "notes": "Staying at 95 — set 3 broke at 9 reps last week (in range, RPE 9). Hit 10/10/10 to earn the bump. Hands shoulder-width, elbows tucked."
+          "targetWeight": 100,
+          "notes": "UP 5 lb from 95 — earned it with 10/10/10 RPE 7/7/7 last week. Hands shoulder-width, elbows tucked, full lockout."
         },
         {
-          "id": "tricep-pushdown-rope",
-          "name": "Tricep Rope Pushdown",
+          "id": "tricep-overhead-rope",
+          "name": "Overhead Tricep Rope Extension",
           "sets": 3,
           "reps": "12-15",
           "restSeconds": 60,
           "targetWeight": null,
-          "notes": "NEW — rotating in from kickbacks. Use the cable, split the rope at the bottom, full lockout. Pick a weight you can hit 12-15 at RPE 7-8."
+          "notes": "NEW — rotating in from rope pushdowns for variety. Face away from pulley, rope overhead, full stretch at bottom. Pick a weight you can hit 12-15 at RPE 7-8."
         }
       ],
       "cooldown": "Stretch chest, shoulders, and triceps — 5 min"
     },
     {
-      "date": "2026-05-06",
+      "date": "2026-05-20",
       "dayOfWeek": "wednesday",
       "pattern": "pull",
       "label": "Pull Day — Back, Biceps & Rear Delts",
@@ -85,7 +85,7 @@
           "restSeconds": 120,
           "targetWeight": 195,
           "pinned": true,
-          "notes": "UP 10 lb from 185 — earned it with 10/10/10 RPE 6/7/7 last week. Brace hard, pull through the floor, controlled descent."
+          "notes": "Staying at 195 — pull day was skipped last week, so let's actually test this load. Brace hard, pull through the floor, controlled descent. Don't skip this one — pull day's the easiest one to bail on."
         },
         {
           "id": "dumbbell-row",
@@ -94,7 +94,7 @@
           "reps": "8-10",
           "restSeconds": 75,
           "targetWeight": 45,
-          "notes": "Staying at 45 — solid 10/10/10 but set 3 RPE 9. One more week here. Each side, squeeze at top."
+          "notes": "Staying at 45 — same target as last week (pull day skipped). Each side, squeeze at top, control the descent."
         },
         {
           "id": "lat-pulldown",
@@ -103,7 +103,7 @@
           "reps": "8-10",
           "restSeconds": 75,
           "targetWeight": null,
-          "notes": "NEW — rotating in for dumbbell pullover. Wide grip on lat bar, pull bar to upper chest, squeeze lats. Pick weight for 8-10 at RPE 7-8."
+          "notes": "Same as last week's plan (skipped). Wide grip on lat bar, pull bar to upper chest, squeeze lats. Pick weight for 8-10 at RPE 7-8."
         },
         {
           "id": "cable-face-pull",
@@ -112,7 +112,7 @@
           "reps": "12-15",
           "restSeconds": 60,
           "targetWeight": null,
-          "notes": "NEW — moving from band to cable for progressive loading. Rope at upper pulley, pull to face, external rotation at the end."
+          "notes": "Same as last week's plan (skipped). Rope at upper pulley, pull to face, external rotation at the end. Light weight, focus on the squeeze."
         },
         {
           "id": "ez-bar-curl",
@@ -121,7 +121,7 @@
           "reps": "8-10",
           "restSeconds": 75,
           "targetWeight": 60,
-          "notes": "Staying at 60 — clean 10/10/10 but set 3 RPE 9. Need RPE 7 across the board to bump up. Strict form, no swing."
+          "notes": "Staying at 60 — same target as last week (skipped). Strict form, no swing."
         },
         {
           "id": "hammer-curl",
@@ -130,13 +130,13 @@
           "reps": "10-12",
           "restSeconds": 60,
           "targetWeight": 25,
-          "notes": "Staying at 25 — hit 12/12/11 (in range) but set 3 RPE 10. Note: previous target was 27.5 but DB increments are 5 lb only — keeping at 25 lb until you crush it RPE 7."
+          "notes": "Staying at 25 — same target as last week (skipped). Neutral grip, control the negative. Bump to 30 once you hit 12/12/12 at RPE 7."
         }
       ],
       "cooldown": "Stretch lats, biceps, and upper back — 5 min"
     },
     {
-      "date": "2026-05-08",
+      "date": "2026-05-22",
       "dayOfWeek": "friday",
       "pattern": "legs",
       "label": "Leg Day — Quads, Hamstrings, Glutes & Core",
@@ -150,7 +150,7 @@
           "restSeconds": 120,
           "targetWeight": 165,
           "pinned": true,
-          "notes": "Staying at 165 — clean 8/8/8 RPE 8 across last week (in range, not at top). Push for 9-10 reps to earn the bump. Below parallel."
+          "notes": "Staying at 165 — second straight week of 8/8/8 RPE 8. In range but not at top. Push for 9-10 reps this week to break through and earn the bump. Below parallel, brace core."
         },
         {
           "id": "romanian-deadlift",
@@ -159,7 +159,7 @@
           "reps": "8-10",
           "restSeconds": 90,
           "targetWeight": 135,
-          "notes": "NEW — barbell version, rotating in for DB RDL. Slight knee bend, slide bar down thighs, feel hamstring stretch. 135 lb to start; adjust if too easy/hard."
+          "notes": "Staying at 135 — 10/10/10 last week but set 1 RPE 8. Need all sets at RPE 7 to earn the bump to 145. Slight knee bend, feel the hamstring stretch."
         },
         {
           "id": "bulgarian-split-squat",
@@ -167,8 +167,8 @@
           "sets": 3,
           "reps": "10-12",
           "restSeconds": 75,
-          "targetWeight": 25,
-          "notes": "UP 5 lb from 20 — crushed 12/12/12 RPE 6/7/7 last week. Each leg, rear foot on bench."
+          "targetWeight": 30,
+          "notes": "Staying at 30 — you self-bumped from 25 last week and hit 10/10/10 RPE 8 (in range, not at top). Push for 11-12 reps this week. Each leg, rear foot on bench."
         },
         {
           "id": "barbell-hip-thrust",
@@ -177,7 +177,7 @@
           "reps": "10-12",
           "restSeconds": 75,
           "targetWeight": 55,
-          "notes": "DOWN 10 lb from 65 — set 3 broke at 7 reps RPE 10 last week (well below range). Drive through heels, squeeze at top, control the descent."
+          "notes": "Staying at 55 — 11/12/12 RPE 7 last week. So close — set 1 was 11 instead of 12. Hit 12/12/12 to earn the bump back to 65. Drive through heels, full hip extension."
         },
         {
           "id": "dumbbell-calf-raises",
@@ -185,8 +185,8 @@
           "sets": 3,
           "reps": "15-20",
           "restSeconds": 45,
-          "targetWeight": null,
-          "notes": "NEW — rotating from barbell to DB. Single-leg for extra challenge. Hold DB at side, raise heel high, pause at top."
+          "targetWeight": 45,
+          "notes": "Staying at 45 — 16/15/15 RPE 8 last week (all in range, near bottom). Push toward 18-20 reps before bumping weight. Single-leg, hold DB at side, pause at top."
         },
         {
           "id": "dead-bug",
@@ -195,7 +195,7 @@
           "reps": "10-12",
           "restSeconds": 60,
           "targetWeight": null,
-          "notes": "NEW — replacing ab wheel after only 5 reps possible last week (RPE 10). Easier core stability work. Keep lower back pressed to floor, slow and controlled."
+          "notes": "Progression: 12/12/12 RPE 7 last week — earned a harder version. This week: slow tempo (3 sec out, 3 sec back) OR hold a 5-10 lb DB behind your head. Keep lower back pressed to floor."
         }
       ],
       "cooldown": "Stretch quads, hamstrings, hip flexors — 5 min"
