@@ -1,21 +1,47 @@
 {
   "version": 1,
-  "lastUpdated": "2026-06-08",
+  "lastUpdated": "2026-06-14",
   "currentGoal": "general",
-  "availableGoals": ["strength", "hypertrophy", "weight-loss", "mobility", "general"],
-  "workoutDays": ["monday", "wednesday", "friday"],
-  "splitRotation": ["push", "pull", "legs"],
+  "availableGoals": [
+    "strength",
+    "hypertrophy",
+    "weight-loss",
+    "mobility",
+    "general"
+  ],
+  "workoutDays": [
+    "monday",
+    "wednesday",
+    "friday"
+  ],
+  "splitRotation": [
+    "push",
+    "pull",
+    "legs"
+  ],
   "pinnedExercises": {
     "push": "barbell-bench-press",
     "pull": "barbell-deadlift",
     "legs": "barbell-squat"
   },
-  "equipment": ["barbell", "dumbbell", "curl-bar", "power-rack", "pull-up-bar", "cable", "lat-bar", "rope-attachment", "leg-attachment", "dip-bars", "bodyweight"],
+  "equipment": [
+    "barbell",
+    "dumbbell",
+    "curl-bar",
+    "power-rack",
+    "pull-up-bar",
+    "cable",
+    "lat-bar",
+    "rope-attachment",
+    "leg-attachment",
+    "dip-bars",
+    "bodyweight"
+  ],
   "highRPEWeeks": 0,
-  "currentWeekRotation": 4,
+  "currentWeekRotation": 5,
   "sessionDurationMinutes": 45,
   "emailTime": "06:00",
-  "weekStartDate": "2026-06-08",
+  "weekStartDate": "2026-06-15",
   "goalParameters": {
     "strength": {
       "reps": "3-5",
