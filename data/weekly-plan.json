@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "weekStartDate": "2026-06-15",
-  "weekEndDate": "2026-06-21",
+  "weekStartDate": "2026-06-22",
+  "weekEndDate": "2026-06-28",
   "goal": "general",
-  "rotationIndex": 5,
+  "rotationIndex": 6,
   "days": [
     {
-      "date": "2026-06-15",
+      "date": "2026-06-22",
       "dayOfWeek": "monday",
       "pattern": "push",
       "label": "Push Day ? Chest, Shoulders & Triceps",
@@ -20,7 +20,7 @@
           "restSeconds": 90,
           "targetWeight": 130,
           "pinned": true,
-          "notes": "Staying at 130 ? and we need to talk. You bumped yourself to 140 on sets 2 and 3 last week without earning it, and set 3 fell apart at 4 reps RPE 10. That's a self-inflicted wound. We go back to 130 for all 3 sets this week. Hit 10/10/10 at RPE 8 or under and you'll earn 135 next week the right way. Pause at chest, drive through heels, no improvised jumps."
+          "notes": "Staying at 130 ? no logs came in this week, so nothing changed. That's two weeks now where I don't have data on this lift. We stay at 130 until you show me 10/10/10 at RPE 8 or under ? that's the only path to 135. Pause at the chest, drive through the heels, no improvised weight jumps mid-session. Log it."
         },
         {
           "id": "incline-dumbbell-press",
@@ -29,7 +29,7 @@
           "reps": "8-10",
           "restSeconds": 90,
           "targetWeight": 40,
-          "notes": "Staying at 40 ? clean 10/10/10 at RPE 7/7/7 last week. Top of the range and easy ? that earns the bump, normally. But you just ran a high-RPE bench session, so let's confirm the 40s feel solid for one more week before we stack more weight. Get 10/10/10 at RPE 7 again and next week we go to 45. 30-degree incline, control the negative."
+          "notes": "Staying at 40 ? no log, no bump. You had 10/10/10 at RPE 7/7/7 two weeks ago and were one clean session away from earning 45. That session never got logged. Hit 10/10/10 at RPE 7 this week and we move to 45 next week. 30-degree incline, control the negative, full range of motion."
         },
         {
           "id": "dumbbell-shoulder-press",
@@ -38,7 +38,7 @@
           "reps": "8-10",
           "restSeconds": 90,
           "targetWeight": 30,
-          "notes": "Staying at 30 ? 10/9/8 at RPE 7/9/9 last week. You hit the top on set 1 but sets 2 and 3 dropped off and got hard. Not there yet. Get all 3 sets to 10 reps at RPE 8 or under to earn 35. Brace your core, don't lean back, full lockout overhead."
+          "notes": "Staying at 30 ? still waiting on a clean set of logs. Two weeks ago you went 10/9/8 at RPE 7/9/9, which wasn't there yet. Get all 3 sets to 10 reps, RPE 8 or under, and you earn 35. Brace the core, don't lean back, full lockout at the top."
         },
         {
           "id": "dumbbell-lateral-raise",
@@ -47,7 +47,7 @@
           "reps": "10-12",
           "restSeconds": 60,
           "targetWeight": 10,
-          "notes": "Staying at 10 ? 12/12/12 at RPE 7/7/7, same as the week before. Weight's not moving yet, but we're adding a 2-second hold at the top of every rep this week. That's your progression. Slight bend in the elbows, lead with the elbows not the hands, slow and controlled."
+          "notes": "Staying at 10 ? still holding here. The progression this week is the same as last week's ask: 2-second hold at the top of every rep. Slight bend in the elbows, lead with the elbows not the hands, slow and controlled on the way down. No log means no progress ? show me 12/12/12 with the holds."
         },
         {
           "id": "close-grip-bench-press",
@@ -56,22 +56,22 @@
           "reps": "8-10",
           "restSeconds": 90,
           "targetWeight": 100,
-          "notes": "Staying at 100 ? 10/10/8 at RPE 7/7/8 last week. Set 3 dropped to 8 reps but RPE was only 8, so you were in range and not cooked ? just fatigued from the bench chaos earlier. Clean up the bench and your triceps should have more in the tank here. Hit 10/10/10 to earn 105. Hands shoulder-width, elbows tucked tight, full lockout."
+          "notes": "Staying at 100 ? no log, no movement. Two weeks ago you were at 10/10/8 at RPE 7/7/8, close but not there. Hit 10/10/10 this week to earn 105. Hands shoulder-width, elbows tucked tight, full lockout at the top every rep."
         },
         {
-          "id": "dips",
-          "name": "Dips",
+          "id": "dumbbell-tricep-overhead",
+          "name": "Dumbbell Overhead Tricep Extension",
           "sets": 3,
-          "reps": "8-10",
-          "restSeconds": 90,
+          "reps": "10-12",
+          "restSeconds": 75,
           "targetWeight": null,
-          "notes": "NEW ROTATION ? swapping in dips this week for the tricep rope pushdown (which you hit 12/12/9 at RPE 7/7/9 ? good start but let's give it a rest). Use the dip bars, stay upright (not leaning forward) to keep it tricep-focused. Bodyweight for now. Pick a rep count you can hit for 3 sets at RPE 7-8. If bodyweight is too easy, note it and we'll add a dumbbell between your legs next week."
+          "notes": "NEW ROTATION ? swapping out dips this week (they were new last week and never got logged). Overhead extension hits the long head of the tricep from a stretched position ? a great complement to the close-grip bench you just did. Single dumbbell, both hands, elbows pointed forward, full stretch at the bottom. Start conservatively ? pick a weight you can hit 10-12 at RPE 7-8 and log the exact number."
         }
       ],
       "cooldown": "Stretch chest, shoulders, and triceps ? 5 min"
     },
     {
-      "date": "2026-06-17",
+      "date": "2026-06-24",
       "dayOfWeek": "wednesday",
       "pattern": "pull",
       "label": "Pull Day ? Back, Biceps & Rear Delts",
@@ -85,7 +85,7 @@
           "restSeconds": 120,
           "targetWeight": 195,
           "pinned": true,
-          "notes": "Staying at 195 ? 8/9/8 at RPE 8/8/8 last week. You pushed into the 9-rep zone on set 2, which is progress, but you need to get all 3 sets into the 9-10 range to earn the jump to 205. You're close. Brace hard off the floor, pull through the heels, controlled descent. Don't rush the setup."
+          "notes": "Staying at 195 ? no log this week, so we hold. Two weeks ago you went 8/9/8 at RPE 8/8/8 ? you were close to earning 205 but not there yet. You need all 3 sets in the 9-10 rep range to make the jump. Brace hard off the floor, pull through the heels, controlled descent. Don't rush the setup between reps."
         },
         {
           "id": "dumbbell-row",
@@ -94,7 +94,7 @@
           "reps": "8-10",
           "restSeconds": 75,
           "targetWeight": 50,
-          "notes": "UP 5 lb to 50 ? 10/10/10 at RPE 7/7/7 last week. That's the cleanest possible signal to move up. Earn it. Each side, pull to the hip, squeeze at the top for a full second, slow the negative. Don't let form slide just because the weight went up."
+          "notes": "Staying at 50 ? you earned the bump to 50 two weeks ago with a clean 10/10/10 at RPE 7/7/7 at 45. No log came in to confirm how the first week at 50 went, so we hold here and you prove it. Pull to the hip, squeeze at the top for a full second, slow the negative. Each side."
         },
         {
           "id": "lat-pulldown",
@@ -103,16 +103,16 @@
           "reps": "8-10",
           "restSeconds": 75,
           "targetWeight": 100,
-          "notes": "Staying at 100 ? 10/10/10 at RPE 7/8/8 last week. Top of the range but RPE climbed to 8 on sets 2 and 3. Get all 3 sets at RPE 7 to earn 110. Wide grip on the lat bar, pull to upper chest, squeeze the lats, no leaning back into a row."
+          "notes": "Staying at 100 ? two weeks ago you hit 10/10/10 at RPE 7/8/8. Top of the range but RPE crept up on sets 2 and 3. Get all 3 sets at RPE 7 to earn 110. Wide grip on the lat bar, pull to upper chest, squeeze the lats at the bottom, no leaning back into a row."
         },
         {
-          "id": "cable-face-pull",
-          "name": "Cable Face Pull",
+          "id": "dumbbell-reverse-flye",
+          "name": "Dumbbell Reverse Flye",
           "sets": 3,
           "reps": "12-15",
           "restSeconds": 60,
           "targetWeight": null,
-          "notes": "NEW ROTATION ? rotating in cable face pulls this week after reverse flyes last week (15/15/15 at RPE 7/7/7 ? great debut, we'll bring those back). Rope attachment at upper pulley, pull to your face, elbows high, finish with external rotation at the end. Light weight ? this is a shoulder health exercise as much as a rear-delt exercise. Hit 12-15 at RPE 7."
+          "notes": "NEW ROTATION ? rotating back in reverse flyes after cable face pulls last week (which were never logged). Two weeks ago you debuted these at 15/15/15 at RPE 7/7/7 ? excellent start. Come back at the same weight, hit 12-15 at RPE 7, and log the weight so we have a number to work with next time. Bent over, squeeze the shoulder blades, controlled negative."
         },
         {
           "id": "ez-bar-curl",
@@ -121,7 +121,7 @@
           "reps": "8-10",
           "restSeconds": 75,
           "targetWeight": 65,
-          "notes": "Staying at 65 ? 10/10/9 at RPE 7/8/9 last week. Set 3 fell a rep short and hit RPE 9. You're in the range but not clean enough to move up. Hit 10/10/10 with RPE staying at 8 or under on all sets and we go to 70. Strict form, no swinging, full squeeze at the top."
+          "notes": "Staying at 65 ? two weeks ago you went 10/10/9 at RPE 7/8/9. Set 3 fell a rep short and hit RPE 9. Still not clean enough to move to 70. Hit 10/10/10 with RPE at 8 or under across all sets and we make the jump. Strict form, no swinging, full squeeze at the top."
         },
         {
           "id": "hammer-curl",
@@ -130,13 +130,13 @@
           "reps": "10-12",
           "restSeconds": 60,
           "targetWeight": 30,
-          "notes": "Staying at 30 ? 10/10/10 at RPE 8/8/8 last week. In range but not at the top, and RPE is right at the edge. Hit 12/12/12 at RPE 8 or under to earn 35. Neutral grip, control the negative, no swinging the 30s up."
+          "notes": "Staying at 30 ? two weeks ago you went 10/10/10 at RPE 8/8/8. In range but not at the top, and RPE is right at the ceiling. Need 12/12/12 at RPE 8 or under to earn 35. Neutral grip, control the negative, no momentum. These should be slow and deliberate."
         }
       ],
       "cooldown": "Stretch lats, biceps, and upper back ? 5 min"
     },
     {
-      "date": "2026-06-19",
+      "date": "2026-06-26",
       "dayOfWeek": "friday",
       "pattern": "legs",
       "label": "Leg Day ? Quads, Hamstrings, Glutes & Core",
@@ -150,7 +150,7 @@
           "restSeconds": 120,
           "targetWeight": 165,
           "pinned": true,
-          "notes": "Staying at 165 ? 8/8/8 at RPE 7/7/8 last week. Solid ? you actually showed up and logged it, which is the first thing. But you hit the bottom of the rep range across the board. Push for 9-10 reps this week, keep RPE at 8 or under, and we bump to 175. Below parallel, brace your core, drive through the heels."
+          "notes": "Staying at 165 ? no log this week, so nothing moves. Two weeks ago you went 8/8/8 at RPE 7/7/8 ? solid but stuck at the bottom of the rep range. Push for 9-10 reps across all 3 sets, keep RPE at 8 or under, and we go to 175. Below parallel, brace your core, drive through the heels. Show up and log it."
         },
         {
           "id": "romanian-deadlift",
@@ -159,7 +159,7 @@
           "reps": "8-10",
           "restSeconds": 90,
           "targetWeight": 145,
-          "notes": "UP 10 lb to 145 ? 10/10/10 at RPE 7/7/7 last week. That's a clean sweep, bump earned. Slight knee bend, push the hips back, feel the hamstring stretch, bar close to the shins on the way down. The jump from 135 to 145 is bigger than usual ? settle in and aim for 8-10 at RPE 7-8."
+          "notes": "Staying at 145 ? you earned the bump from 135 to 145 two weeks ago with 10/10/10 at RPE 7/7/7. No log came in to confirm how week one at 145 went, so we hold and you prove it. Slight knee bend, push the hips back, feel the hamstring stretch, bar close to the shins on the way down. Aim for 8-10 at RPE 7-8."
         },
         {
           "id": "bulgarian-split-squat",
@@ -168,7 +168,7 @@
           "reps": "10-12",
           "restSeconds": 75,
           "targetWeight": 30,
-          "notes": "Staying at 30 ? 10/12/10 last week. You hit 12 on set 2 but sets 1 and 3 stayed at 10. Inconsistent. Get all 3 sets to 12 clean reps per side to earn 35. Rear foot on the bench, drop straight down, drive through the front heel."
+          "notes": "Staying at 30 ? two weeks ago you went 10/12/10. Set 2 got to 12 but sets 1 and 3 didn't. Still inconsistent. Get all 3 sets to 12 clean reps per side to earn 35. Rear foot on the bench, drop straight down, drive through the front heel. Don't let the set 2 energy carry and then fall off at the end."
         },
         {
           "id": "barbell-hip-thrust",
@@ -177,16 +177,16 @@
           "reps": "10-12",
           "restSeconds": 75,
           "targetWeight": 65,
-          "notes": "UP 10 lb to 65 ? 12/12/12 at RPE 7/7/7 last week. You called the shot on this one ? perfect execution earns the bump. Upper back on the bench, drive through the heels, full hip extension, squeeze the glutes hard at the top. Hold the squeeze for a full second."
+          "notes": "Staying at 65 ? you earned this bump two weeks ago with a perfect 12/12/12 at RPE 7/7/7 at 55. No log confirmed week one at 65, so we hold here. Upper back on the bench, drive through the heels, full hip extension, squeeze the glutes hard at the top and hold for a full second. Log the session."
         },
         {
-          "id": "leg-extension",
-          "name": "Leg Extension",
+          "id": "leg-curl",
+          "name": "Leg Curl",
           "sets": 3,
           "reps": "12-15",
           "restSeconds": 60,
           "targetWeight": null,
-          "notes": "NEW ROTATION ? swapping out leg curl this week (you started at 70 lbs which was way too heavy ? 8/9/6 at RPE 9/9/9 across the board, drop that weight significantly when it rotates back in). Leg extension balances things out with some direct quad isolation after all the hinging. Use the leg attachment. Squeeze the quads hard at the top, controlled negative. Pick a weight you can hit 12-15 at RPE 7-8."
+          "notes": "NEW ROTATION ? rotating back in leg curl after leg extension last week (never logged). Two weeks ago when this debuted you went in at 70 lbs which was way too heavy ? 8/9/6 at RPE 9/9/9. Drop that weight significantly. Try 45-50 lbs. This is an isolation exercise for your hamstrings, not a grind. Hit 12-15 at RPE 7-8, controlled negative, full range of motion. Log the weight you use."
         },
         {
           "id": "dead-bug",
@@ -195,7 +195,7 @@
           "reps": "10-12",
           "restSeconds": 60,
           "targetWeight": null,
-          "notes": "Staying with dead bug ? 10/10/10 at RPE 7/7/7 bodyweight last week. Bodyweight was easy, so this week: hold a 5-10 lb dumbbell behind your head as you extend. 3 sec out, 3 sec back, opposite arm and leg. Lower back stays glued to the floor the entire time."
+          "notes": "Staying with dead bug ? the ask last week was to hold a 5-10 lb dumbbell behind your head as you extend. No log came in so I don't know if that happened. Same ask this week: grab a light dumbbell (5-10 lb), hold it behind your head as you extend. 3 sec out, 3 sec back, opposite arm and leg. Lower back stays glued to the floor the entire time. Log whether you used the weight or went bodyweight."
         }
       ],
       "cooldown": "Stretch quads, hamstrings, hip flexors ? 5 min"
