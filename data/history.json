@@ -1,0 +1,61 @@
+{
+  "logs": [
+    {
+      "date": "2026-07-15",
+      "exercises": [
+        {
+          "id": "barbell-deadlift",
+          "name": "Barbell Deadlift",
+          "sets": [
+            { "weight": 185, "reps": 10, "rpe": 7 },
+            { "weight": 185, "reps": 9, "rpe": 9 },
+            { "weight": 185, "reps": 8, "rpe": 8 }
+          ]
+        },
+        {
+          "id": "dumbbell-row",
+          "name": "Dumbbell Single-Arm Row",
+          "sets": [
+            { "weight": 55, "reps": 10, "rpe": 7 },
+            { "weight": 50, "reps": 10, "rpe": 7 },
+            { "weight": 50, "reps": 10, "rpe": 7 }
+          ]
+        },
+        {
+          "id": "lat-pulldown",
+          "name": "Lat Pulldown",
+          "sets": [
+            { "weight": 100, "reps": 10, "rpe": 7 },
+            { "weight": 100, "reps": 10, "rpe": 8 },
+            { "weight": 100, "reps": 8, "rpe": 8 }
+          ]
+        },
+        {
+          "id": "cable-face-pull",
+          "name": "Cable Face Pull",
+          "sets": [
+            { "weight": 55, "reps": 12, "rpe": 7 },
+            { "weight": 55, "reps": 15, "rpe": 7 },
+            { "weight": 55, "reps": 15, "rpe": 7 }
+          ]
+        },
+        {
+          "id": "ez-bar-curl",
+          "name": "EZ Bar Curl",
+          "sets": [
+            { "weight": 70, "reps": 10, "rpe": 9 },
+            { "weight": 70, "reps": 10, "rpe": 8 },
+            { "weight": 70, "reps": 8, "rpe": 8 }
+          ]
+        },
+        {
+          "id": "dumbbell-pullover",
+          "name": "Dumbbell Pullover",
+          "sets": [
+            { "weight": 30, "reps": 10, "rpe": 8 }
+          ]
+        }
+      ]
+    }
+  ]
+}
