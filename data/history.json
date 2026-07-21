@@ -56,6 +56,65 @@
           ]
         }
       ]
+    },
+    {
+      "date": "2026-07-20",
+      "exercises": [
+        {
+          "id": "barbell-bench-press",
+          "name": "Barbell Bench Press",
+          "sets": [
+            { "weight": 130, "reps": 8, "rpe": 8 },
+            { "weight": 130, "reps": 8, "rpe": 8 },
+            { "weight": 130, "reps": 8, "rpe": 8 }
+          ]
+        },
+        {
+          "id": "incline-dumbbell-press",
+          "name": "Incline Dumbbell Press",
+          "sets": [
+            { "weight": 45, "reps": 8, "rpe": 8 },
+            { "weight": 45, "reps": 10, "rpe": 8 },
+            { "weight": 45, "reps": 10, "rpe": 8 }
+          ]
+        },
+        {
+          "id": "dumbbell-shoulder-press",
+          "name": "Dumbbell Shoulder Press",
+          "sets": [
+            { "weight": 30, "reps": 10, "rpe": 8 },
+            { "weight": 30, "reps": 10, "rpe": 8 },
+            { "weight": 30, "reps": 10, "rpe": 9 }
+          ]
+        },
+        {
+          "id": "dumbbell-lateral-raise",
+          "name": "Dumbbell Lateral Raise",
+          "sets": [
+            { "weight": 15, "reps": 10, "rpe": 8 },
+            { "weight": 15, "reps": 10, "rpe": 8 },
+            { "weight": 15, "reps": 10, "rpe": 8 }
+          ]
+        },
+        {
+          "id": "dips",
+          "name": "Dips",
+          "sets": [
+            { "weight": 0, "reps": 5, "rpe": 10 },
+            { "weight": 0, "reps": 4, "rpe": 10 },
+            { "weight": 0, "reps": 4, "rpe": 10 }
+          ]
+        },
+        {
+          "id": "tricep-pushdown-rope",
+          "name": "Tricep Rope Pushdown",
+          "sets": [
+            { "weight": 40, "reps": 12, "rpe": 8 },
+            { "weight": 40, "reps": 12, "rpe": 8 },
+            { "weight": 40, "reps": 10, "rpe": 9 }
+          ]
+        }
+      ]
     }
   ]
 }
