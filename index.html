@@ -1000,24 +1000,12 @@ function doLogSet(exIdx, setIdx, weight, reps, rpe) {
   const storageKey = isPreview ? 'preview-log-' + dayOverride : 'log-' + getTodayString();
   localStorage.setItem(storageKey, JSON.stringify(workoutLog));
 
-  // Was this set already logged before? (editing vs first-time logging)
-  const wasAlreadyLogged = document.getElementById(`setrow-${exIdx}-${setIdx}`).classList.contains('logged');
-
   // Update UI
   const row = document.getElementById(`setrow-${exIdx}-${setIdx}`);
   row.classList.add('logged');
   row.classList.remove('dirty');
   const btn = document.getElementById(`donebtn-${exIdx}-${setIdx}`);
   btn.classList.add('checked');
-
-  // Only start rest timer on first-time logging, not when editing
-  if (!wasAlreadyLogged) {
-    const exercise = todayWorkout.exercises[exIdx];
-    const isLastSet = setIdx >= exercise.sets - 1;
-    if (!isLastSet) {
-      startRestTimer(exercise.restSeconds);
-    }
-  }
 
   // Update card status
   renderToday();
