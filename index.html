@@ -845,6 +845,7 @@ function renderToday() {
     const anyDone = completedSets > 0;
 
     const card = document.createElement('div');
+    card.id = 'excard-' + exIdx;
     card.className = 'exercise-card' + (allDone ? ' completed' : anyDone ? ' in-progress' : '');
     card.innerHTML = `
       <div class="exercise-header" onclick="toggleSets(${exIdx})">
@@ -852,7 +853,7 @@ function renderToday() {
           <div class="name">${ex.name}</div>
           <div class="prescription">${ex.sets} sets x ${ex.reps} reps &middot; ${ex.restSeconds}s rest</div>
         </div>
-        <div class="status-icon ${allDone ? 'status-done' : anyDone ? 'status-active' : 'status-pending'}">
+        <div class="status-icon ${allDone ? 'status-done' : anyDone ? 'status-active' : 'status-pending'}" id="status-${exIdx}">
           ${allDone ? '&#10003;' : anyDone ? completedSets + '/' + ex.sets : ex.sets}
         </div>
       </div>
@@ -888,7 +889,7 @@ function renderSets(exercise, exIdx, exLog) {
         <div class="input-wrap">
           <label>LBS</label>
           <input type="number" inputmode="decimal" id="weight-${exIdx}-${s}"
-            value="${defaultWeight}"
+            value="${defaultWeight}" data-default="${defaultWeight}"
             placeholder="-" oninput="markDirty(${exIdx}, ${s})" />
         </div>
         <div class="input-wrap">
@@ -1007,8 +1008,48 @@ function doLogSet(exIdx, setIdx, weight, reps, rpe) {
   const btn = document.getElementById(`donebtn-${exIdx}-${setIdx}`);
   btn.classList.add('checked');
 
-  // Update card status
-  renderToday();
+  // Update in place. A full renderToday() here would rebuild every card, which
+  // closes the exercise you're working in and discards anything typed into sets
+  // that aren't logged yet.
+  updateExerciseStatus(exIdx);
+  carryWeightForward(exIdx, setIdx, parseFloat(weight));
+  updateCompleteButton();
+}
+
+// Refresh one card's colour and its "3/4" counter without touching the rest of the page.
+function updateExerciseStatus(exIdx) {
+  const exercise = todayWorkout.exercises[exIdx];
+  const exLog = workoutLog['ex-' + exIdx] || {};
+  const completedSets = Object.keys(exLog).filter(k => k.startsWith('set-')).length;
+  const allDone = completedSets >= exercise.sets;
+  const anyDone = completedSets > 0;
+
+  const card = document.getElementById('excard-' + exIdx);
+  if (card) {
+    card.className = 'exercise-card' + (allDone ? ' completed' : anyDone ? ' in-progress' : '');
+  }
+
+  const icon = document.getElementById('status-' + exIdx);
+  if (icon) {
+    icon.className = 'status-icon ' + (allDone ? 'status-done' : anyDone ? 'status-active' : 'status-pending');
+    icon.innerHTML = allDone ? '&#10003;' : anyDone ? completedSets + '/' + exercise.sets : exercise.sets;
+  }
+}
+
+// Prefill later sets with the weight just used, but only where the box is still
+// showing its prefilled default — never overwrite a number you typed yourself.
+function carryWeightForward(exIdx, setIdx, weight) {
+  if (isNaN(weight)) return;
+  const exercise = todayWorkout.exercises[exIdx];
+  const exLog = workoutLog['ex-' + exIdx] || {};
+  for (let s = setIdx + 1; s < exercise.sets; s++) {
+    if (exLog['set-' + s]) continue;
+    const input = document.getElementById(`weight-${exIdx}-${s}`);
+    if (!input) continue;
+    if (input.value !== '' && input.value !== input.dataset.default) continue;
+    input.value = weight;
+    input.dataset.default = String(weight);
+  }
 }
 
 // ==================== REST TIMER ====================
