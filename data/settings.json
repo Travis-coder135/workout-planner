@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdated": "2026-08-23",
+  "lastUpdated": "2026-08-30",
   "currentGoal": "general",
   "availableGoals": [
     "strength",
@@ -38,10 +38,10 @@
     "bodyweight"
   ],
   "highRPEWeeks": 0,
-  "currentWeekRotation": 16,
+  "currentWeekRotation": 17,
   "sessionDurationMinutes": 45,
   "emailTime": "06:00",
-  "weekStartDate": "2026-08-24",
+  "weekStartDate": "2026-08-31",
   "goalParameters": {
     "strength": {
       "reps": "3-5",
