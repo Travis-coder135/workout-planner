@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "weekStartDate": "2026-11-09",
-  "weekEndDate": "2026-11-15",
+  "weekStartDate": "2026-11-16",
+  "weekEndDate": "2026-11-22",
   "goal": "general",
-  "rotationIndex": 27,
+  "rotationIndex": 28,
   "days": [
     {
-      "date": "2026-11-09",
+      "date": "2026-11-16",
       "dayOfWeek": "monday",
       "pattern": "push",
       "label": "Push Day ? Chest, Shoulders & Triceps",
@@ -20,7 +20,7 @@
           "restSeconds": 90,
           "targetWeight": 135,
           "pinned": true,
-          "notes": "Eight weeks. Eight straight weeks at 135 with zero logs. I don't know if you're training, I don't know if you're not, I don't know if the weight is easy or grinding you ? I have nothing. The weight stays at 135 and will stay here until you give me data. Touch the chest, full 1-second pause at the bottom, drive through the heels, stay braced the entire set. Need 9-10 reps across all three sets at RPE 7 or lower to earn 140. Log every set, every rep, every RPE. That's all I'm asking."
+          "notes": "Nine weeks. Nine straight weeks at 135 with zero logs. That's not a plateau ? that's a blackout. I have no data, no RPE, no rep counts, nothing. The weight stays at 135 and it will keep staying here until you give me something to work with. Touch the chest, full 1-second pause at the bottom, drive through the heels, stay braced the entire set. Need 9-10 reps across all three sets at RPE 7 or lower to earn 140. Log every set, every rep, every RPE. That is the only ask."
         },
         {
           "id": "incline-dumbbell-press",
@@ -29,7 +29,7 @@
           "reps": "8-10",
           "restSeconds": 90,
           "targetWeight": 45,
-          "notes": "Eight weeks at 45 with no logs. Still here, still waiting. 30-degree incline, elbows at 45 degrees, 2-second negative on every rep. Need 10/10/10 at RPE 7 to earn 50. Save something in the tank so set 3 doesn't collapse ? the old data showed rep drops across sets and that's exactly what happens when you go too hard on set 1. Log it."
+          "notes": "Nine weeks at 45 with no logs. Still here. 30-degree incline, elbows at 45 degrees, 2-second negative on every rep. Need 10/10/10 at RPE 7 to earn 50. Don't blow set 1 ? save something in the tank so set 3 doesn't fall apart. Log it."
         },
         {
           "id": "dumbbell-shoulder-press",
@@ -38,7 +38,7 @@
           "reps": "8-10",
           "restSeconds": 90,
           "targetWeight": 35,
-          "notes": "Eight weeks at 35 with no logs. Last known data had you at RPE 9 across all three sets ? that's not owning the weight, that's surviving it. Check your seat height and setup before rep one, press straight up, full lockout at the top, no lean back. Need all three sets at RPE 7-8 to earn the bump. Log it."
+          "notes": "Nine weeks at 35 with no logs. Last known data had you at RPE 9 across all three sets ? that's surviving, not owning. Check your seat height before rep one, press straight up, full lockout at the top, no lean back. Need all three sets at RPE 7-8 to earn the bump. Log it."
         },
         {
           "id": "dumbbell-lateral-raise",
@@ -47,7 +47,7 @@
           "reps": "10-12",
           "restSeconds": 60,
           "targetWeight": null,
-          "notes": "ROTATION IN ? swapping out Front Raise this week. Front raise was in last week with no log. Lateral raise returns: raise to shoulder height, slight elbow bend, controlled 2-second negative on the way down, don't use momentum or rock your torso. Pick a weight where 10-12 reps is RPE 7 and log it. Baseline session."
+          "notes": "Back again this week ? no log came in last week so this is still a baseline session. Raise to shoulder height, slight elbow bend, controlled 2-second negative on the way down, no momentum, no torso rock. Pick a weight where 10-12 reps is RPE 7 and log it. Need a number to work with."
         },
         {
           "id": "close-grip-bench-press",
@@ -56,7 +56,7 @@
           "reps": "8-10",
           "restSeconds": 90,
           "targetWeight": 95,
-          "notes": "Eight weeks at 95 with no logs. Hands shoulder-width, elbows tucked tight throughout, lower to the chest, full lockout on every rep. Log this session and 100 lbs is yours next week. It has been eight weeks of silence. Just log it."
+          "notes": "Nine weeks at 95. Nine weeks of silence. Hands shoulder-width, elbows tucked tight throughout, lower to the chest, full lockout on every rep. Log this session and 100 lbs is yours next week. It has been nine weeks. Just log it."
         },
         {
           "id": "dumbbell-tricep-overhead",
@@ -65,13 +65,13 @@
           "reps": "10-12",
           "restSeconds": 75,
           "targetWeight": null,
-          "notes": "ROTATION IN ? swapping out Tricep Rope Pushdown this week. Rope pushdown was in last week with no log. Overhead extension: single dumbbell, both hands, elbows pointing straight up, lower behind your head until you feel the stretch, full extension at the top. Keep your elbows from flaring wide. Pick a weight where 10-12 reps is RPE 7 and log it. Baseline session."
+          "notes": "Second week in a row with no log on this one. Single dumbbell, both hands, elbows pointing straight up, lower behind your head until you feel the stretch, full extension at the top. Keep your elbows from flaring wide. Pick a weight where 10-12 reps is RPE 7 and log it. Still a baseline session until I get data."
         }
       ],
       "cooldown": "Stretch chest, shoulders, and triceps ? 5 min"
     },
     {
-      "date": "2026-11-11",
+      "date": "2026-11-18",
       "dayOfWeek": "wednesday",
       "pattern": "pull",
       "label": "Pull Day ? Back, Biceps & Rear Delts",
@@ -85,7 +85,7 @@
           "restSeconds": 120,
           "targetWeight": 195,
           "pinned": true,
-          "notes": "Eight weeks at 195. Eight weeks of silence. Last real data was 8/8/8 at RPE 8/8/8 and that was nearly two months ago ? I have no idea where you actually are right now. Lats tight before you break the floor, bar dragging up the shins, big breath and brace before every single rep, full lockout at the top. Take the full 2 minutes between sets. Need 8+ reps on all three sets at RPE 7 or lower to earn 205. Log every set."
+          "notes": "Nine weeks at 195. Nine weeks of no logs. Last real data was 8/8/8 at RPE 8/8/8 and that was over two months ago ? I have no idea where you actually are. Lats tight before you break the floor, bar dragging up the shins, big breath and brace before every single rep, full lockout at the top. Take the full 2 minutes between sets. Need 8+ reps on all three sets at RPE 7 or lower to earn 205. Log every set."
         },
         {
           "id": "lat-pulldown",
@@ -94,7 +94,7 @@
           "reps": "8-10",
           "restSeconds": 75,
           "targetWeight": 110,
-          "notes": "Eight weeks at 110 without a single log. Last session showed 10/9/8 at RPE 7/8/8 ? losing reps and gaining effort across sets. Wide grip, pull to upper chest, hard lat squeeze at the bottom, stay upright and do not let your torso row it down. Need 10/10/10 at RPE 7 to earn 120. Log every set."
+          "notes": "Nine weeks at 110 with no logs. Last known session was 10/9/8 at RPE 7/8/8 ? rep drop and effort climb across sets. Wide grip, pull to upper chest, hard lat squeeze at the bottom, stay upright and do not let your torso row it down. Need 10/10/10 at RPE 7 to earn 120. Log every set."
         },
         {
           "id": "dumbbell-row",
@@ -103,7 +103,7 @@
           "reps": "8-10",
           "restSeconds": 75,
           "targetWeight": null,
-          "notes": "ROTATION IN ? swapping out Barbell Bent-Over Row this week. Barbell row was in last week with no log. Single-arm dumbbell row: one hand on the bench, pull the dumbbell to your hip ? not your shoulder, not your stomach. Squeeze the lat at the top, controlled descent. Pick a weight where 8-10 reps is RPE 7 and log it. Baseline session."
+          "notes": "Second week in a row with no log on this one. One hand on the bench, pull the dumbbell to your hip ? not your shoulder, not your stomach. Squeeze the lat at the top, controlled descent. Pick a weight where 8-10 reps is RPE 7 and log it. Still a baseline session."
         },
         {
           "id": "cable-face-pull",
@@ -112,16 +112,16 @@
           "reps": "12-15",
           "restSeconds": 60,
           "targetWeight": 70,
-          "notes": "Eight weeks at 70 with no logs. Last known session was 12/12/12 at RPE 7/8/8 ? set 1 clean, sets 2 and 3 climbing in effort. Rope at upper pulley, pull to your face, thumbs pointing behind you at the finish, elbows high, full external rotation at the end. Need 15/15/15 at RPE 7 to earn 75. Push the rep count on every set and log it."
+          "notes": "Nine weeks at 70 with no logs. Last known session was 12/12/12 at RPE 7/8/8 ? set 1 clean, sets 2 and 3 climbing. Rope at upper pulley, pull to your face, thumbs pointing behind you at the finish, elbows high, full external rotation at the end. Need 15/15/15 at RPE 7 to earn 75. Log it."
         },
         {
-          "id": "hammer-curl",
-          "name": "Hammer Curl",
+          "id": "ez-bar-curl",
+          "name": "EZ Bar Curl",
           "sets": 3,
           "reps": "8-10",
           "restSeconds": 75,
           "targetWeight": null,
-          "notes": "ROTATION IN ? swapping out EZ Bar Curl this week. EZ bar curl was in last week with no log. Hammer curl: neutral grip, elbows pinned to your sides, full curl to the top, 2-second controlled negative. Targets the brachialis hard. Pick a weight where 8-10 reps is RPE 7 and log it. Baseline session."
+          "notes": "ROTATION IN ? swapping out Hammer Curl this week. Hammer curl was in last week with no log. EZ bar curl: strict form, elbows pinned to your sides, full curl to the top, 2-second controlled negative on the way down. Easier on the wrists than a straight bar. Pick a weight where 8-10 reps is RPE 7 and log it. Baseline session."
         },
         {
           "id": "dumbbell-curl",
@@ -130,13 +130,13 @@
           "reps": "8-10",
           "restSeconds": 75,
           "targetWeight": 25,
-          "notes": "Eight weeks of no logs. Still at 25 lbs. If it's too easy, great ? log it and tell me and I'll bump it immediately. If it's too hard, log it and tell me that. Elbows pinned, supinate at the top, 2-second negative. The weight doesn't matter as much as the data. Give me something to work with."
+          "notes": "Nine weeks at 25 lbs with no logs. If it's too easy, log it and tell me ? I'll bump it immediately. If it's too hard, log it and tell me that too. Elbows pinned, supinate at the top, 2-second negative. The weight is secondary. The data is what matters. Give me something."
         }
       ],
       "cooldown": "Stretch lats, biceps, and upper back ? 5 min"
     },
     {
-      "date": "2026-11-13",
+      "date": "2026-11-20",
       "dayOfWeek": "friday",
       "pattern": "legs",
       "label": "Leg Day ? Quads, Hamstrings, Glutes & Core",
@@ -150,7 +150,7 @@
           "restSeconds": 120,
           "targetWeight": 165,
           "pinned": true,
-          "notes": "Eight weeks at 165. Eight weeks without a single log. Last real data was 8/8/8 at RPE 8/8/8 and that was nearly two months ago ? I have no idea if you're stuck, improving, or skipping entirely. Below parallel, big breath before you unrack, brace hard, drive through the heels, chest up out of the hole. Take the full 2 minutes between sets. Need 9-10 reps on all three sets at RPE 7 or under to earn 175. Show up. Do the work. Log it."
+          "notes": "Nine weeks at 165. Nine weeks without a single log. Last real data was 8/8/8 at RPE 8/8/8 and that was over two months ago ? I do not know if you're stuck, improving, or skipping entirely. Below parallel, big breath before you unrack, brace hard, drive through the heels, chest up out of the hole. Take the full 2 minutes between sets. Need 9-10 reps on all three sets at RPE 7 or under to earn 175. Show up. Do the work. Log it."
         },
         {
           "id": "romanian-deadlift",
@@ -159,16 +159,16 @@
           "reps": "8-10",
           "restSeconds": 90,
           "targetWeight": 155,
-          "notes": "Eight weeks at 155, no logs. Last session was 10/9/10 at RPE 7/8/8 ? set 1 great, sets 2 and 3 losing reps and climbing in effort. Slight knee bend, hips back, bar close to the legs the whole way down, feel the hamstring stretch at the bottom, don't round the lower back. Need 10/10/10 at RPE 7 to earn 165. Rest the full 90 seconds ? that's where sets 2 and 3 fall apart. Log it."
+          "notes": "Nine weeks at 155, no logs. Last known session was 10/9/10 at RPE 7/8/8 ? set 1 great, sets 2 and 3 losing reps and climbing in effort. Slight knee bend, hips back, bar close to the legs the whole way down, feel the hamstring stretch, don't round the lower back. Need 10/10/10 at RPE 7 to earn 165. Rest the full 90 seconds. Log it."
         },
         {
-          "id": "bulgarian-split-squat",
-          "name": "Bulgarian Split Squat",
+          "id": "dumbbell-lunges",
+          "name": "Dumbbell Walking Lunges",
           "sets": 3,
           "reps": "10-12",
           "restSeconds": 75,
           "targetWeight": null,
-          "notes": "ROTATION IN ? swapping out Dumbbell Walking Lunges this week. Lunges were in last week with no log. Bulgarian split squat: rear foot elevated on the bench, torso upright, front knee tracks over your toes, go deep enough to feel the hip flexor stretch on the rear leg. Pick a weight per hand where 10-12 reps per leg is RPE 7 and log it. Baseline session."
+          "notes": "ROTATION IN ? swapping out Bulgarian Split Squat this week. Split squat was in last week with no log. Walking lunges: long stride for more glute, short stride for more quad ? your call based on what you want to feel. Keep torso upright, control the descent, drive through the front heel to stand. Pick a weight per hand where 10-12 reps per leg is RPE 7 and log it. Baseline session."
         },
         {
           "id": "barbell-hip-thrust",
@@ -177,16 +177,16 @@
           "reps": "10-12",
           "restSeconds": 75,
           "targetWeight": 85,
-          "notes": "Eight weeks at 85 with no logs. Last session was 12/10/10 at RPE 8/8/8 ? set 1 hit 12 but sets 2 and 3 fell to 10 with high effort throughout. Upper back on the bench, barbell padded across your hips, drive through the heels, full hip extension at the top, squeeze hard for a full second, controlled descent. Need 12/12/12 at RPE 7 to earn 90. Rest the full 75 seconds between sets. Log it."
+          "notes": "Nine weeks at 85 with no logs. Last known session was 12/10/10 at RPE 8/8/8 ? set 1 hit 12 but sets 2 and 3 fell off with high effort throughout. Upper back on the bench, barbell padded across your hips, drive through the heels, full hip extension at the top, squeeze hard for a full second, controlled descent. Need 12/12/12 at RPE 7 to earn 90. Rest the full 75 seconds. Log it."
         },
         {
-          "id": "leg-curl",
-          "name": "Leg Curl",
+          "id": "leg-extension",
+          "name": "Leg Extension",
           "sets": 3,
           "reps": "12-15",
           "restSeconds": 60,
           "targetWeight": null,
-          "notes": "ROTATION IN ? swapping out Leg Extension this week. Leg extension was in last week with no log. Leg curl on the leg attachment: curl your heels toward your glutes, full range of motion, squeeze at the top, 2-second controlled negative on the way down. Don't let the weight drop. Pick a weight where 12-15 reps is RPE 7 and log it. Baseline session."
+          "notes": "ROTATION IN ? swapping out Leg Curl this week. Leg curl was in last week with no log. Leg extension on the leg attachment: squeeze the quads hard at the top, 2-second controlled negative on the way down. Don't let the weight drop. Pick a weight where 12-15 reps is RPE 7 and log it. Baseline session."
         },
         {
           "id": "cable-crunch",
@@ -195,7 +195,7 @@
           "reps": "10-12",
           "restSeconds": 60,
           "targetWeight": 40,
-          "notes": "Still at 40 lbs ? no log came back last week or any week recently. Kneel facing the pulley, rope behind your head, crunch down using your abs ? not your hips, not your arms. The movement comes entirely from your abs contracting. Pause at the bottom, control the return. If 40 is too easy or too hard, log it and tell me. Give me something to work with."
+          "notes": "Still at 40 lbs ? no log again this week or any week recently. Kneel facing the pulley, rope behind your head, crunch down using your abs only ? not your hips, not your arms. The movement comes entirely from your abs contracting. Pause at the bottom, control the return. If 40 is too easy or too hard, log it and tell me. Anything. Just log it."
         }
       ],
       "cooldown": "Stretch quads, hamstrings, hip flexors ? 5 min"
